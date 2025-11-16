@@ -1,9 +1,12 @@
 Absolute path
 
 assets => css folder -> style.css
+
 pages => home.html
-home.html => './assets/css/style.css'
 ../assets/css/style.css
+
+home.html => './assets/css/style.css'
+
 
 Relative path
 
