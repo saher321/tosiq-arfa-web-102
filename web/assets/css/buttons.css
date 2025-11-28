@@ -1,0 +1,40 @@
+.btn {
+    border-radius: 50px;
+    padding: 12px 20px;
+    border: none;
+}
+.btn1 {
+    background-color: #1B3C53;
+    color: #f1f1f1;
+}
+.btn1:hover {
+    background-color: #3d5769ff;
+    color: #f1f1f1;
+}
+.btn2 {
+    background-color: #BF1A1A;
+    color: #f1f1f1;
+}
+.btn2:active {
+    background-color: #4d0d0dff;
+    color: #f1f1f1;
+}
+.btn3 {
+    background-color: #F0E491;
+    color: #333;
+}
+.btn3:focus {
+    background-color: #817313ff;
+    color: #f1f1f1;
+}
+/* input css */
+.search-field {
+    outline: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+.search-field:focus {
+    border: 1px solid #3d5769ff;
+    background-color: #FEF3E2;
+    border-radius: 4px;
+}
