@@ -1,0 +1,37 @@
+body {
+    background-color: #E5E7E9;
+}
+.card {
+    background-color: white;
+    border-radius: 8px;
+    max-width: 250px;
+}
+.card-header {
+    background-image: url("../images/card-bg.jpg");
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.card-body small{
+    color: #999;
+    font-size: 9px;
+}
+.card-body p{
+    color: #333;
+    font-size: 20px;
+    margin-top: 4px;
+}
+.card-body, .card-footer {
+    padding: 8px;
+}
+.card-footer {
+    margin-top: -16px;
+}
+.card-footer button{
+    height: 40px; width: 40px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer
+}
