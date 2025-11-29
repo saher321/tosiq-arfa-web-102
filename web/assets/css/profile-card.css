@@ -1,0 +1,29 @@
+.card {
+  max-width: 250px;
+  padding: 8px;
+  box-shadow: 0px 0px 3px #ccc;
+  border-radius: 8px;
+}
+.card-img {
+  background-image: url("../images/user-profile.jpg");
+  height: 200px; width: auto;
+  background-size: cover;
+  border-radius: 8px;
+}
+.card-body > .user-name {
+  font-size: 20px;
+}
+.card-body > .user-bio {
+  font-size: 16px;
+  color: #7c7c7c;
+}
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-footer > .card-icons {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;  
+}
