@@ -1,0 +1,19 @@
+/* css variables */
+:root {
+  --box-shadow: 0px 0px 3px #8b3d3dff;
+  --box-padding: 50px;
+}
+/* css */
+h2 {
+  box-shadow: var(--box-shadow);
+  padding: var(--box-padding);
+  border-radius: 5px;
+  color: red;
+}
+
+h3 {
+  box-shadow: var(--box-shadow);
+  padding: var(--box-padding);
+  border-radius: 5px;
+  color: purple
+}
