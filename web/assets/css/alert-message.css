@@ -1,0 +1,22 @@
+.alert-message {
+  background-color: #DBFFE1;
+  border-left: 4px solid #00BC1A;
+  max-width: 400px;
+  display: flex;
+  justify-content: space-between;
+
+  padding: 8px;
+  border-radius: 5px;
+
+}
+.alert-content {
+  display: flex;
+  gap: 8px;
+  align-items: start;
+}
+.alert-content  i {
+  color: #00BC1A
+}
+.text h3{
+  margin-top: -3px;
+}

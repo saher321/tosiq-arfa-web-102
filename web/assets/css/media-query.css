@@ -1,0 +1,25 @@
+body {
+  background-color: gray;
+}
+h1 {
+  color: yellowgreen
+}
+
+@media (max-width: 425px) {
+  body {
+    background-color: red;
+  }
+  h1 {
+    color: white;
+  }
+}
+
+@media (width > 425px) and (width <= 768px){  // range defined
+
+  body {
+    background-color: yellow;
+  }
+  h1 {
+    color: white;
+  }
+}
