@@ -1,0 +1,40 @@
+body {
+    background-color: #000000ff;
+}
+nav {
+    background-color: #1A1A1A; 
+    width: fit-content;
+    margin: 8px auto;
+    padding: 4px 16px;
+    border-radius: 50px;
+    border: 1px solid #999;
+}
+
+ul {
+    list-style: none;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+nav > ul > li > a {
+    text-decoration: none;
+    color: #CFCFCF;
+    padding: 8px;
+}
+
+nav > ul > li > a:hover {
+    color: #F8814A;
+}
+
+.cta-btn:hover {
+    color: #cfcfcf !important;
+}
+
+.cta-btn {
+    background-color: #F8814A;
+    color: #cfcfcf;
+    padding: 8px;
+    border-radius: 50px;
+}
