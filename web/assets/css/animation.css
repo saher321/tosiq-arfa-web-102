@@ -1,0 +1,43 @@
+.box {
+    height: 50px;
+    width: 50px;
+    background-color: red;
+    margin-bottom: 8px; 
+
+    animation-name: box;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes box {
+    0% {
+        margin-left: 0px;
+        rotate: -360deg;
+    }
+    100% {
+        /* margin-left: 200px; */
+        scale: 1.1;
+        background-color: black;
+        border-radius: 50px;
+    }
+}
+
+/* circle loading */
+.dot-loading {
+    height: 50px;
+    width: 50px;
+    border: 3px dotted #000;
+    margin-bottom: 8px; 
+    border-radius: 50px;
+
+    animation: loading 10s infinite linear;
+}
+
+@keyframes loading {
+    0% {
+        rotate: 0deg;
+    }
+    100% {
+        rotate: 360deg;
+    }
+}
