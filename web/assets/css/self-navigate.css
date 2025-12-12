@@ -1,0 +1,61 @@
+html {
+    scroll-behavior: smooth; 
+}
+body{
+    background-color: aliceblue;
+    position: relative;
+}
+.top-bar {
+    position: sticky-top;
+    top: 0px;
+}
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav .links ul {
+    list-style: none;
+    padding: 0px;
+    display: flex;
+
+    gap: 12px;
+} 
+
+nav :where(.links>ul, .cta) {
+    background-color: white;
+    box-shadow: 0px 0px 3px #f1f1f1;
+    padding:  8px 16px;
+    border-radius: 50px;
+}
+nav .links {
+    ul {
+        li {
+            padding: 8px 16px; 
+
+            a {
+                text-decoration: none;
+                color: black
+            }      
+        }
+    }
+}
+
+section {
+    height: 80vh;
+    width: 100%;
+    margin-bottom: 100px;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+section#home {
+    background-color: #999;
+}
+section#about {
+    background-color: #ccc;
+}
+section#contact {
+    background-color: #ddd;
+}
