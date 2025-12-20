@@ -23,11 +23,10 @@ function printavg() {
     var computer   = parseInt(document.getElementById("com").value);
     var sst        = parseInt(document.getElementById("sst").value);
     var math       = parseInt(document.getElementById("math").value);
-    var result     = document.getElementById("result");
-    var sum     = document.getElementById("sum");
-    var result     = document.getElementById("result");
 
-    var avg = (english + urdu + computer + sst + math) / 5;
-    result.innerText = avg;
-    sum.innerText = (english + urdu + computer + sst + math)
+    var avgResult     = document.getElementById("avg");
+    var sumResult     = document.getElementById("sum");
+
+    avgResult.innerText = (english + urdu + computer + sst + math) / 5;
+    sumResult.innerText = (english + urdu + computer + sst + math)
 }
