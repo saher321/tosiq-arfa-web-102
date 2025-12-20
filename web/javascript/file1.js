@@ -11,4 +11,4 @@ users = [
     {name: "Sam", age: 20},
     {name: "Alice", age: 26},
 ];
-console.log("From external js file")
+console.log("From external js file", users[1].age)
