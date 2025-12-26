@@ -1,0 +1,17 @@
+JS - JavaScript
+Programming language
+ 1 - Functions
+ 2 - DOM - Real time changes on Web document
+ 3 - State - LocalStorage
+ -------
+ 1 -- Functions
+	Basic arithmatic
+	If, If else, if elsif, nested if
+	loops
+	arrays
+	object
+	oop (class) - four pillers of OOP
+2 -- DOM
+	form handling,
+	Real time document change
+	State

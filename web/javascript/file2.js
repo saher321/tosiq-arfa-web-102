@@ -18,6 +18,7 @@ var avg = (english + urdu + computer + sst + math) / 5;
 console.log(avg);
 
 function printavg() {
+    
     var english    = parseInt(document.getElementById("eng").value);
     var urdu       = parseInt(document.getElementById("ur").value);
     var computer   = parseInt(document.getElementById("com").value);
