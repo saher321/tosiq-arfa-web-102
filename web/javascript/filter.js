@@ -26,7 +26,7 @@ function showData() {
 }
 
 
-filteredData();
+
 function filteredData() {
     // var filteredData = list.find((item) => { return item.userRole == "Vendor" });
 
