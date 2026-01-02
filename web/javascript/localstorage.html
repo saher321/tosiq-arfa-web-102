@@ -7,7 +7,13 @@
 </head>
 <body>
     <h1>LocalStorage</h1>
-    <button onclick="storeName()">Store name</button>
+    <button onclick="clearAll()">Clear Info</button>
+    <button onclick="storeInfo()">Store Info</button>
+    <button onclick="removeInfo('password')">Remove Info</button>
+    <hr>
+    <button onclick="showInfo()">Show Info</button>
+
+    <p id="result"></p>
     <!-- js -->
     <script src="./localstorage.js"></script>
 </body>
