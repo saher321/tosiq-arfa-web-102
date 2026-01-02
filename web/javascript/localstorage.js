@@ -11,6 +11,8 @@ function storeInfo () {
     var name = "Ali";
     var email= "ali@gmail.com";
     var pswrd= "1234";
+
+    // userData : {name: name, email: email, password: pswrd} 
     localStorage.setItem("name", name)
     localStorage.setItem("email", email)
     localStorage.setItem("password", pswrd)
