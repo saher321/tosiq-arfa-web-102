@@ -1,4 +1,4 @@
-
+// function overloading
 function greetings (name, timeOfDay) {
     if (!name && !timeOfDay) return "Hello";
     if (name && !timeOfDay) return `Hello ${name}`;
