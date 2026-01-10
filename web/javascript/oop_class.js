@@ -46,4 +46,23 @@ class Cat extends Animal {
 }
 let cat = new Cat("Oreo", "Meow meow");
 
-console.log(cat.getDetails())
+console.log(cat.getDetails());
+
+class Shapes {
+    constructor(radius) {
+        this.radius = radius;
+    }
+}
+
+class Circle extends Shapes {
+    constructor(radius) {
+        super(radius)
+    }
+
+    getArea () {
+        return `Area of circle is ${3.14 * Math.pow(this.radius, 2)}`;
+    }
+}
+
+let areaOfCircle = new Circle(7);
+console.log(areaOfCircle.getArea())
