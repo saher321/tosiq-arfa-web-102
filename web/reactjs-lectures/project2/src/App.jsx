@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import * as LuICONS from "react-icons/lu";
 import * as FaICONS from "react-icons/fa";
+import Users from './Users';
 
 const App = () => {
 
@@ -20,6 +21,12 @@ const App = () => {
 
   return (
     <div>
+
+      <Users />
+
+
+      <hr />
+
        <FaICONS.FaGithubSquare /> App count is {value}
       <br />
       <button onClick={add}>
