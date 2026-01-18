@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import * as LuICONS from "react-icons/lu";
 import * as FaICONS from "react-icons/fa";
 import Users from './Users';
-
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import {APIS} from './utils/APIS.js'
 const App = () => {
 
   const [value, setValue] = useState(0);
@@ -20,7 +22,9 @@ const App = () => {
   }
 
   return (
-    <div>
+    <>
+    <Navbar />
+
 
       <Users />
 
@@ -47,7 +51,8 @@ const App = () => {
         <span> Show password</span>
       </button>
 
-    </div>
+    <Footer />
+    </>
   )
 }
 

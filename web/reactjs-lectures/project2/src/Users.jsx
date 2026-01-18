@@ -5,7 +5,7 @@ const Users = () => {
     <div>
       <table border={1} cellPadding={10} cellSpacing={0} width={"100%"}>
         <thead>
-            <tr>
+            <tr className='bg-black text-white'>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -19,7 +19,7 @@ const Users = () => {
                 users.map((user) => {
                     return (
                         // user.id >= 5 &&
-                        <tr key={user.id}>
+                        <tr key={user.id} className='bg-gray-100 hover:bg-green-200'>
                             <td>{user.id}</td>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
