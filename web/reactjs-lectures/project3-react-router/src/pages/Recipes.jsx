@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import axios from 'axios';
 import { ALL_RECIPES } from '../utils/APIS.js';
+import RecipeItem from '../components/RecipeItem.jsx';
 
 // get => display data
 // delete => data delete
@@ -24,29 +25,36 @@ const Recipes = () => {
                 
             } catch (error) {
                 console.log("Error: ", error)
+            } finally {
                 setIsLoading(false)
             }
         }
         getRecipes();
-    }, [])
+    }, []);
 
+    // setInterval, setTimeout (will take seconds)
     if (isLoading) {
         return(
             <div>Loading ...</div>
         )
     }
 
-
     return (
         <div>
+
+        <div className='grid grid-cols-12 gap-3'>
+            
         {
             recipes.map((recipe, i) => {
                 return (
-                    <div key={i}> {recipe.id} - {recipe.name}</div>
+                    <div key={i} className='col-span-4'> 
+                        <RecipeItem recipe={recipe} />
+                    </div>
                 )
 
             })
         }
+        </div>
         </div>
     )
 }
