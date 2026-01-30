@@ -70,6 +70,12 @@ const RecipeDetails = () => {
                     <div>
                         <FaStar className='text-yellow-500 inline -mt-1' /> {recipeDetails?.rating}
                     </div>
+
+                    <div className='my-4'>
+                        <button className='hover:shadow cursor-pointer py-2 px-4 bg-black/80 text-gray-50 rounded active:bg-black'>
+                            Order Now
+                        </button>
+                    </div>
                 </div>
             </div>
 
