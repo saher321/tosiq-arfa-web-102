@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import axios from 'axios';
 import { ALL_RECIPES } from '../utils/APIS.js';
 import RecipeItem from '../components/RecipeItem.jsx';
+import { Link } from 'react-router';
 
 // get => display data
 // delete => data delete
@@ -48,7 +49,9 @@ const Recipes = () => {
             recipes.map((recipe, i) => {
                 return (
                     <div key={i} className='col-span-4'> 
-                        <RecipeItem recipe={recipe} />
+                        <Link to={`/recipes/${recipe.id}`}>
+                            <RecipeItem recipe={recipe} />
+                        </Link>
                     </div>
                 )
 
