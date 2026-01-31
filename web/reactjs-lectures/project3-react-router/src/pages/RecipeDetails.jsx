@@ -72,14 +72,14 @@ const RecipeDetails = () => {
                     </div>
 
                     <div className='my-4'>
-                        <button className='hover:shadow cursor-pointer py-2 px-4 bg-black/80 text-gray-50 rounded active:bg-black'>
+                        <button className='hover:shadow cursor-pointer py-2 px-4 bg-black text-gray-50 rounded active:bg-black/80'>
                             Order Now
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div className='flex gap-8 mt-4'>
+            <div className='flex justify-between gap-8 mt-4'>
                 
                 <div>
                     <span className='mt-6 mb-4 block font-bold'>Ingredients</span>
@@ -94,7 +94,7 @@ const RecipeDetails = () => {
                         }
                     </ol>
                 </div>
-                <div className='h-[100] w-1 bg-gray-200'>&nbsp;</div>
+                <div className='mt-6 h-[100] w-[2px] bg-gray-200'>&nbsp;</div>
                 <div>
                     <span className='mt-6 mb-4 block font-bold'>Instructions</span>
 

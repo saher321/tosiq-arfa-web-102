@@ -1,6 +1,4 @@
 import React, { useRef } from 'react'
-import Navbar from '../components/Navbar'
-
 const About = () => {
 
   let name = useRef(null);
