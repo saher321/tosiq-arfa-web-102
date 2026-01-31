@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { MyContext } from '../context/ContextStore';
 
 const Home = () => {
-    let myname = useContext(MyContext);
+    let data = useContext(MyContext);
 
     const [counter, setCounter] = useState(0);
 
@@ -26,7 +26,7 @@ const Home = () => {
         className='m-1 p-1 bg-black rounded shadow text-white'
         onClick={() => setCounter(counter+1)}>Click to increase value</button>
       </div>
-      {myname}
+      {data.name} - {data.age}
     </div>
   )
 }
