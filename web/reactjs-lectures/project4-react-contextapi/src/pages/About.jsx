@@ -6,6 +6,9 @@ const About = () => {
     <div>
       About page <br />
       {data.name} - {data.age}
+
+      <hr />
+      <button onClick={data.printData}>Click</button>
     </div>
   )
 }
