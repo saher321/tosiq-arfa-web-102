@@ -1,3 +1,11 @@
+<?php
+    $user = [ "name" => "Tosiq", "age" => "20" ];
+
+    // programming
+    // sessions
+    // class function
+    // REST APIS: Create, Read, Update, Delete
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,5 +15,10 @@
 </head>
 <body>
     <h1>Php page</h1>
+    
+    <?php
+    echo $user["name"]. " " .$user["age"];
+    ?>
+
 </body>
 </html>
