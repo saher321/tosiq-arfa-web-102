@@ -5,6 +5,11 @@
     // sessions
     // class function
     // REST APIS: Create, Read, Update, Delete
+    $subject1 = 89;
+    $subject2 = 76;
+    $sum = $subject1 + $subject2;
+    $avg = $sum/2;
+    echo $avg;
 ?>
 <!DOCTYPE html>
 <html lang="en">
