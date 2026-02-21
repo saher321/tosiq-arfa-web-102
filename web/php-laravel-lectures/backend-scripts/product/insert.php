@@ -20,7 +20,7 @@ if ($result) {
     ];
 
     $upload_path = '../../uploads/products/' . $pi;
-    
+
     move_uploaded_file($_FILES['pimg']['tmp_name'], $upload_path);
 
     header("Location: ../../product-form.php");
