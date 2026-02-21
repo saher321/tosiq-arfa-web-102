@@ -36,7 +36,7 @@
         }    
         ?>
 
-        <form action="./backend-scripts/product/insert.php" method="post" enctype="multipart/form-data" class="row g-3">
+        <form action="../backend-scripts/product/insert.php" method="post" enctype="multipart/form-data" class="row g-3">
             <div class="col-md-6">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" name="pname" placeholder="Enter product name" class="form-control" id="name">
