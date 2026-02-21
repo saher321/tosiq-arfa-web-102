@@ -25,16 +25,22 @@ error_reporting(~E_ALL);
     }
     
     ?>
-    <form action="./backend-scripts/product/insert.php" method="post">
+    <form action="./backend-scripts/product/insert.php" method="post" enctype="multipart/form-data">
         <input type="text" name="pname" placeholder="Enter product name">
         <br><br>
+
+        <input type="file" accept=".png, .jpg, .jpeg" name="pimg">
+        <br><br>
+
         <input type="text" name="pcat" placeholder="Enter product category">
         <br><br>
+
         <input type="number" name="price" placeholder="Enter product price">
         <br><br>
 
         <textarea name="pdesc" id="" cols="30" rows="10" placeholder="Enter description"></textarea>
         <br><br>
+
         <button type="submit" name="submitbtn">Submit</button>
     </form>
 </body>
