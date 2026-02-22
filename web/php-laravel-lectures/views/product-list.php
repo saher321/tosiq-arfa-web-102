@@ -1,4 +1,5 @@
 <?php 
+    include "../common/global.php";
     include "../config/db.php";
     include './templates/top.php';
 
@@ -8,7 +9,11 @@
 ?>
 
 <div class="p-5 container">
-
+    <h2>
+        <?php 
+        echo APP_NAME . " <br> " . URL;
+        ?>
+    </h2>
     <div class="mb-4 d-flex align-items-center justify-content-between">
         <h3>
             Products
