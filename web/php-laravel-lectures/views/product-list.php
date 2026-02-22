@@ -32,18 +32,37 @@
         </thead>
         <tbody>
             <?php 
+            $i = 0;
             foreach($products as $product){
+                $i++;
             ?>
             <tr>
-                <td><?php echo $product['id']?></td>
+                <td><?php echo $i?></td>
                 <td>
-                    <img src="../uploads/products/<?php echo $product['image']?>" width="56" alt="">
+                    <img src="
+                    <?php
+                        if ($product['image'] == null){
+                    ?>
+                    ../assets/images/dummy-image.jpg
+                    <?php
+                        } else {
+                    ?>
+                    ../uploads/products/<?php echo $product['image']?>
+                    <?php
+                        }
+                    ?>
+                    " width="56" alt="">
                 </td>
                 <td><?php echo $product['name']?></td>
                 <td><?php echo $product['category']?></td>
                 <td><?php echo $product['price']?></td>
                 <td>
-                    Edit / Delete
+                    Edit / 
+                    <!-- <a href="../backend-scripts/product/delete.php?id=<php echo $product['id']?>"> Delete
+                        </a> -->
+                        <a href="#" onclick="deleteProduct(<?php echo $product['id']?>)">
+                            Delete
+                        </a>
                 </td>
             </tr>
             <?php
@@ -53,5 +72,16 @@
     </table>
 
 </div>
+
+
+<script>
+    function deleteProduct(id){
+        if (confirm("Delete this product?")){
+            window.location.href = `../backend-scripts/product/delete.php?id=${id}`;
+        } else {
+            return;
+        }
+    }
+</script>
 
 <?php include './templates/bottom.php'?>
