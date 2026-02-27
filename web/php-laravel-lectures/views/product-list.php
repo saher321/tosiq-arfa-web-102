@@ -11,7 +11,7 @@
 <div class="p-5 container">
     <h2>
         <?php 
-        echo APP_NAME . " <br> " . URL;
+        echo APP_NAME;
         ?>
     </h2>
     <div class="mb-4 d-flex align-items-center justify-content-between">
@@ -62,7 +62,9 @@
                 <td><?php echo $product['category']?></td>
                 <td><?php echo $product['price']?></td>
                 <td>
-                    Edit / 
+                    <a href="./product-details.php?id=<?php echo $product['id']?>">
+                        Edit
+                    </a> / 
                     <!-- <a href="../backend-scripts/product/delete.php?id=<php echo $product['id']?>"> Delete
                         </a> -->
                         <a href="#" onclick="deleteProduct(<?php echo $product['id']?>)">

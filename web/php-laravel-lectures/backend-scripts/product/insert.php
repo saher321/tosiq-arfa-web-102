@@ -23,7 +23,7 @@ if ($result) {
 
     move_uploaded_file($_FILES['pimg']['tmp_name'], $upload_path);
 
-    header("Location: ../../product-form.php");
+    header("Location: ../../views/product-form.php");
 
 } else {
     $_SESSION['response'] = [
