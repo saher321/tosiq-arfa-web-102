@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2026 at 07:50 AM
+-- Generation Time: Feb 28, 2026 at 05:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(80) NOT NULL,
-  `image` varchar(255) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
   `category` varchar(20) DEFAULT NULL,
   `price` float NOT NULL,
   `description` longtext DEFAULT NULL,
@@ -38,6 +38,16 @@ CREATE TABLE `products` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `image`, `category`, `price`, `description`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(7, 'Pepsi', 'pepsi.png', 'Drinks', 300, 'Pepsi 1.5L drink 21', '2026-02-21 04:59:04', '2026-02-21 04:59:04', NULL),
+(8, 'Brown Leather Belt', 'burger-8339491.jpg', 'Wearing1', 120000, 'Text data', '2026-02-21 05:30:16', '2026-02-21 05:30:16', NULL),
+(9, 'Nike air shoes1', 'background.jpg', 'Wear', 666, 'Dummy air shoes', '2026-02-27 04:29:17', '2026-02-27 04:29:17', NULL),
+(11, 'Item 1', 'close-up-robot-with-blue-light-its-face-generative-ai_958078-7380.jpg', 'Wearing', 120000, 'some dummy text', '2026-02-28 04:44:02', '2026-02-28 04:44:02', NULL);
 
 --
 -- Indexes for dumped tables
@@ -57,7 +67,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
