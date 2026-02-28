@@ -3,7 +3,7 @@
     <div class="p-5 container">
         <div class="mb-4 d-flex align-items-center justify-content-between">
             <h3>
-                Product form
+                Add Product
             </h3>
             <div>
                 <a href="./product-list.php" class="btn btn-primary">
@@ -14,26 +14,18 @@
 
     
         <?php
-        if ( isset($_SESSION['response']) && $_SESSION['response']['status'] == true){
+        if ($_SESSION['insert_response']['status'] == true){
         ?>
 
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Success!</strong>
-            <?php echo $_SESSION['response']['message'];?>
+            <?php echo $_SESSION['insert_response']['message'];?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 
         <?php
-        } else {
-        ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Error!</strong>
-            <?php echo $_SESSION['response']['message'];?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
-        <?php
-        }    
+        }   
+        unset($_SESSION['insert_response']);
         ?>
 
         <form action="../backend-scripts/product/insert.php" method="post" enctype="multipart/form-data" class="row g-3">

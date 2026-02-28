@@ -24,6 +24,22 @@
             </a>
         </div>
     </div>
+
+    <?php
+        if ($_SESSION['update_response']['status'] == true){
+        ?>
+
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>Updated!</strong>
+            <?php echo $_SESSION['update_response']['message'];?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <?php
+        }    
+        unset($_SESSION['update_response']);
+        ?>
+
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>

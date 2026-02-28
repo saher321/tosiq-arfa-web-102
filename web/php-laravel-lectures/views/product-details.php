@@ -21,7 +21,7 @@
     <div class="p-5 container">
         <div class="mb-4 d-flex align-items-center justify-content-between">
             <h3>
-                Product form
+                Edit Product Details
             </h3>
             <div>
                 <a href="./product-list.php" class="btn btn-primary">
@@ -30,31 +30,9 @@
             </div>
         </div>
 
-    
-        <?php
-        if ( isset($_SESSION['response']) && $_SESSION['response']['status'] == true){
-        ?>
-
-        <div class="alert alert-primary alert-dismissible fade show" role="alert">
-            <strong>Updated!</strong>
-            <?php echo $_SESSION['response']['message'];?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
-        <?php
-        } else {
-        ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Error!</strong>
-            <?php echo $_SESSION['response']['message'];?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
-        <?php
-        }    
-        ?>
 
         <form action="../backend-scripts/product/update.php" method="post" enctype="multipart/form-data" class="row g-3">
+            <input type="hidden" name="id" value="<?php echo $product['id']?>">
             <div class="col-md-6">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" value="<?php echo $product['name']?>" name="pname" placeholder="Enter product name" class="form-control" id="name">

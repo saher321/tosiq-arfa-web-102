@@ -14,7 +14,7 @@ $result = mysqli_query($connection, $query);
 
 if ($result) {
 
-    $_SESSION['response'] = [
+    $_SESSION['insert_response'] = [
         'status' => true,
         'message'=> "Data added successfully"
     ];
@@ -26,7 +26,7 @@ if ($result) {
     header("Location: ../../views/product-form.php");
 
 } else {
-    $_SESSION['response'] = [
+    $_SESSION['insert_response'] = [
         'status' => false,
         'message'=> "Failed to insert data"
     ];
