@@ -13,7 +13,13 @@
     <?php
         $data = $product->all_products();
         foreach($data as $item){
-            echo $item['name'] . "<br>";
+    ?>
+    <h4>
+        <a href="./product-details.php?id=<?php echo $item['id']?>">
+            <?php echo $item['name']?>
+        </a>
+    </h4>
+    <?php
         }
     ?>
 </body>
