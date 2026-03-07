@@ -13,6 +13,11 @@
             return $single_row;
         }
 
+        function delete($id){
+            $q = "delete from products where id=$id";
+            return $this->query($q);
+        }
+
     }
 
     $product = new Product();
