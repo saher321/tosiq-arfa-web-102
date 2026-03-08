@@ -1,0 +1,13 @@
+bookme.pk
+ server url => http://127.0.0.1:8000
+ backend:	server 	=> laravel project  ::: URLS/APIS
+ frontend:	ui 	=> reactjs/nextjs    ::: UIS
+
+end-point url
+http://127.0.0.1:8000/api/colors
+
+Laravel => MVC
+
+M => Model 	> db fields
+V  => View	> ui
+C  => Controller	> business logic
