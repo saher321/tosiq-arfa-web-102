@@ -16,9 +16,9 @@ class DepartmentController extends Controller
         //     ["id" => 103, "name" => "Dept 3"],
         // ];
 
-        return [
+        return response()->json([
             'data' => $departments,
             'total'=> $departments->count()
-        ];
+        ]);
     }
 }
