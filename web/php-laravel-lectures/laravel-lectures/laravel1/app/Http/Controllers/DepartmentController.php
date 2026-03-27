@@ -21,6 +21,27 @@ class DepartmentController extends Controller
             'total'       => $departments->count()
         ]);
     }
+
+    public function save(Request $request) {
+        
+        $name = $request->deptName;
+
+        $res = Department::create(['name' => $name]);
+
+        if ($res) {
+            return response()->json([
+                'status'    => true,
+                'message'   => "Data has been saved"
+            ]);
+        } else {
+            return response()->json([
+                'status'    => false,
+                'message'   => "Failed to save data"
+            ]);
+        }
+
+
+    }
     
     public function delete($id) {
 

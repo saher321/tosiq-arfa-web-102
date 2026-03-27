@@ -4,6 +4,7 @@ import axios from 'axios'
 import { All_DEPT_API, DEL_DEPT_API } from '../../utils/APIS';
 import toast from 'react-hot-toast'
 import moment from 'moment'
+import { Link } from 'react-router';
 
 const DepartmentList = () => {
 
@@ -50,8 +51,9 @@ const DepartmentList = () => {
     return (
         <WebLayout>
 
-            <div className="px-6 py-4 border-b border-gray-100">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
                 <h2 className="text-lg font-semibold text-gray-700">Departments</h2>
+                <Link to={'/departments/create'} className="p-2 bg-indigo-600 text-gray-100 rounded hover:shadow">Add department</Link>
             </div>
 
             <div className="overflow-x-auto">

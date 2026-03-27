@@ -14,4 +14,6 @@ use App\Http\Controllers\DepartmentController;
 
 Route::get('/departments', [DepartmentController::class, 'departments'])->name('departments.list');
 
+Route::post('/departments/save', [DepartmentController::class, 'save'])->name('departments.save');
+
 Route::get('/departments/{id}/delete', [DepartmentController::class, 'delete'])->name('departments.delete');
