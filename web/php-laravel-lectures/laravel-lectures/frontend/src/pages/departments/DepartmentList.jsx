@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import WebLayout from '../../layouts/WebLayout';
 import axios from 'axios'
-import { All_DEPT_API } from '../../utils/APIS';
+import { All_DEPT_API, DEL_DEPT_API } from '../../utils/APIS';
 import toast from 'react-hot-toast'
 import moment from 'moment'
 
@@ -32,6 +32,21 @@ const DepartmentList = () => {
         getDepartments()
     }, [])
 
+    const handleDelete = async (e, id) => {
+        e.preventDefault();
+        try {
+            const response = await axios.get(DEL_DEPT_API + "/" + id + "/delete")
+            if (response.data.status == true) {
+                toast.success(response.data.message)
+                await getDepartments()
+            } else {
+                toast.error(response.data.message)
+            }
+        } catch (error) {
+            toast.error('Server error!')
+        }
+    }
+
     return (
         <WebLayout>
 
@@ -61,8 +76,12 @@ const DepartmentList = () => {
                                 <td className="px-6 py-4 text-gray-700">{dept.name}</td>
                                 <td className="px-6 py-4 text-gray-500">{moment(dept.created_at).format('lll')}</td>
                                 <td className="px-6 py-4">
-                                    <button className="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+                                    <button className="cursor-pointer text-indigo-600 hover:text-indigo-800 text-sm font-medium">
                                         View
+                                    </button>
+                                    <span> | </span>
+                                    <button onClick={(e) => handleDelete(e, dept.id)} className="cursor-pointer text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+                                        Delete
                                     </button>
                                 </td>
                             </tr>

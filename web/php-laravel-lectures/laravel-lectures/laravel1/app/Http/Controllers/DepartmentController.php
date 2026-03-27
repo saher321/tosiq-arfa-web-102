@@ -21,4 +21,28 @@ class DepartmentController extends Controller
             'total'       => $departments->count()
         ]);
     }
+    
+    public function delete($id) {
+
+        if ($id > 0) {
+            $department = Department::where('id', $id)->first();
+            if ($department) {
+                $department->delete();
+                return response()->json([
+                    'status'    => true,
+                    'message'   => "Data has been deleted!"
+                ]);
+            } else {
+                return response()->json([
+                    'status'    => false,
+                    'message'   => "Data not found!"
+                ]);
+            }
+        }else {
+            return response()->json([
+                'status'    => false,
+                'message'   => "Id not found!"
+            ]);
+        }
+    }
 }

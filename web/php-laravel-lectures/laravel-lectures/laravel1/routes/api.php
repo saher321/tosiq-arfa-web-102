@@ -13,3 +13,5 @@ use App\Http\Controllers\DepartmentController;
 // });
 
 Route::get('/departments', [DepartmentController::class, 'departments'])->name('departments.list');
+
+Route::get('/departments/{id}/delete', [DepartmentController::class, 'delete'])->name('departments.delete');
