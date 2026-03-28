@@ -108,3 +108,5 @@ class DepartmentController extends Controller
         }
     }
 }
+
+//  student tbl fields: id, name, dept, email, address
