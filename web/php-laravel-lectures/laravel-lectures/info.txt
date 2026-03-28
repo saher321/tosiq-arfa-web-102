@@ -11,3 +11,13 @@ Laravel => MVC
 M => Model 	> db fields
 V  => View	> ui
 C  => Controller	> business logic
+
+------------------
+1) node_modules
+    - npm i
+2) vendors
+    - composer install
+3) .env
+    - cp .env.example .env
+    - php artisan key:generate
+

@@ -14,6 +14,10 @@ use App\Http\Controllers\DepartmentController;
 
 Route::get('/departments', [DepartmentController::class, 'departments'])->name('departments.list');
 
+Route::get('/departments/{id}/edit', [DepartmentController::class, 'department'])->name('departments.edit');
+
 Route::post('/departments/save', [DepartmentController::class, 'save'])->name('departments.save');
+
+Route::post('/departments/update', [DepartmentController::class, 'update'])->name('departments.update');
 
 Route::get('/departments/{id}/delete', [DepartmentController::class, 'delete'])->name('departments.delete');

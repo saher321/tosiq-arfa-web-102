@@ -22,7 +22,29 @@ class DepartmentController extends Controller
         ]);
     }
 
-    public function save(Request $request) {
+    public function department($id){
+        if ($id > 0) {
+            $department = Department::where('id', $id)->first();
+            if ($department) {
+                return response()->json([
+                    'status'    => true,
+                    $department
+                ]);
+            } else {
+                return response()->json([
+                    'status'    => false,
+                    'message'   => "Data not found!"
+                ]);
+            }
+        }else {
+            return response()->json([
+                'status'    => false,
+                'message'   => "Id not found!"
+            ]);
+        }
+    }
+
+    public function save(Request $request){
         
         $name = $request->deptName;
 
@@ -43,7 +65,7 @@ class DepartmentController extends Controller
 
     }
     
-    public function delete($id) {
+    public function delete($id){
 
         if ($id > 0) {
             $department = Department::where('id', $id)->first();
@@ -65,5 +87,9 @@ class DepartmentController extends Controller
                 'message'   => "Id not found!"
             ]);
         }
+    }
+
+    public function update(Request $request){
+        return $request;
     }
 }
