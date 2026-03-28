@@ -90,6 +90,21 @@ class DepartmentController extends Controller
     }
 
     public function update(Request $request){
-        return $request;
+        $id = $request->id;
+        $name = $request->deptName;
+
+        $res = Department::where('id', $id)->update(['name' => $name]);
+
+        if ($res) {
+            return response()->json([
+                'status'    => true,
+                'message'   => "Data has been updated"
+            ]);
+        } else {
+            return response()->json([
+                'status'    => false,
+                'message'   => "Failed to save data"
+            ]);
+        }
     }
 }

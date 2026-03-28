@@ -3,7 +3,7 @@ import WebLayout from '../../layouts/WebLayout'
 import { useForm } from "react-hook-form"
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { EDIT_DEPT_API, SAVE_DEPT_API } from '../../utils/APIS'
+import { EDIT_DEPT_API, UPDATE_DEPT_API } from '../../utils/APIS'
 import { useParams } from 'react-router'
 const EditDepartment = () => {  
 
@@ -28,12 +28,15 @@ const EditDepartment = () => {
         getSingleDept()
     }, [params.id])
 
-    const handleSaveDept = async (data) => {
+    const handleUpdateDept = async (data) => {
         try {
-            const response = await axios.post(SAVE_DEPT_API, data)
+            let newData = {
+                id: params.id,
+                deptName: data.deptName
+            }
+            const response = await axios.post(UPDATE_DEPT_API, newData)
             if (response.data.status == true){
                 toast.success(response.data.message)
-                reset();
             }else {
                 toast.error(response.data.message)
             }
@@ -49,7 +52,7 @@ const EditDepartment = () => {
             <h2 className="text-lg font-semibold text-gray-700">Edit department #{params.id}</h2>
         </div>
         <div className="px-6 py-4 text-sm">
-            <form onSubmit={handleSubmit(handleSaveDept)}>
+            <form onSubmit={handleSubmit(handleUpdateDept)}>
                 <div>
                     <label htmlFor="">Name</label>
                 </div>
