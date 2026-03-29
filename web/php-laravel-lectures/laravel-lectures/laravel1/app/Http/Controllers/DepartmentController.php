@@ -70,11 +70,20 @@ class DepartmentController extends Controller
         if ($id > 0) {
             $department = Department::where('id', $id)->first();
             if ($department) {
-                $department->delete();
-                return response()->json([
-                    'status'    => true,
-                    'message'   => "Data has been deleted!"
-                ]);
+            
+                if ($department->students()->count() > 0) {
+                    return response()->json([
+                        'status'    => false,
+                        'message'   => "Department has students. Can't delete!"
+                    ]);
+                } else {
+                    $department->delete();
+                    return response()->json([
+                        'status'    => true,
+                        'message'   => "Data has been deleted"
+                    ]);
+                }
+
             } else {
                 return response()->json([
                     'status'    => false,

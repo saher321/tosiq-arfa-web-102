@@ -59,12 +59,6 @@ const DepartmentList = () => {
         
     }
 
-    const handleToggleStudents = (e, id) => {
-        e.preventDefault();
-        console.log(id)
-        setIsToggle(!isToggle)
-    }
-
     return (
         <WebLayout>
 
