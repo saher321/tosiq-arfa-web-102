@@ -3,32 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Department;
-class DepartmentController extends Controller
+use App\Models\Student;
+class StudentController extends Controller
 {
     //
-    public function departments(){
-        $departments = Department::with("students")->get();
+    public function students(){
+        $students = Student::with("department")->get();
         
-        // $departments = [
-        //     ["id" => 101, "name" => "Dept 1"],
-        //     ["id" => 102, "name" => "Dept 2"],
-        //     ["id" => 103, "name" => "Dept 3"],
+        // $students = [
+        //     ["id" => 1, "name" => "Student 1", "email" => "student1@example.com"],
+        //     ["id" => 2, "name" => "Student 2", "email" => "student2@example.com"],
+        //     ["id" => 3, "name" => "Student 3", "email" => "student3@example.com"],
         // ];
 
         return response()->json([
-            'departments' => $departments,
-            'total'       => $departments->count()
+            'students' => $students,
+            'total'    => $students->count()
         ]);
     }
 
-    public function department($id){
+    public function student($id){
         if ($id > 0) {
-            $department = Department::where('id', $id)->first();
-            if ($department) {
+            $student = Student::where('id', $id)->first();
+            if ($student) {
                 return response()->json([
                     'status'    => true,
-                    $department
+                    $student
                 ]);
             } else {
                 return response()->json([
@@ -46,9 +46,17 @@ class DepartmentController extends Controller
 
     public function save(Request $request){
         
-        $name = $request->deptName;
+        $name = $request->stdName;
+        $dept_id = $request->deptId;
+        $email = $request->email;
+        $address = $request->address;
 
-        $res = Department::create(['name' => $name]);
+        $res = Student::create([
+            'name' => $name,
+            'dept_id' => $dept_id,
+            'email' => $email,
+            'address' => $address
+        ]);
 
         if ($res) {
             return response()->json([
@@ -68,9 +76,9 @@ class DepartmentController extends Controller
     public function delete($id){
 
         if ($id > 0) {
-            $department = Department::where('id', $id)->first();
-            if ($department) {
-                $department->delete();
+            $student = Student::where('id', $id)->first();
+            if ($student) {
+                $student->delete();
                 return response()->json([
                     'status'    => true,
                     'message'   => "Data has been deleted!"
@@ -91,9 +99,17 @@ class DepartmentController extends Controller
 
     public function update(Request $request){
         $id = $request->id;
-        $name = $request->deptName;
+        $name = $request->stdName;
+        $dept_id = $request->deptId;
+        $email = $request->email;
+        $address = $request->address;
 
-        $res = Department::where('id', $id)->update(['name' => $name]);
+        $res = Student::where('id', $id)->update([
+            'name' => $name,
+            'dept_id' => $dept_id,
+            'email' => $email,
+            'address' => $address
+        ]);
 
         if ($res) {
             return response()->json([
@@ -108,5 +124,3 @@ class DepartmentController extends Controller
         }
     }
 }
-
-//  student tbl fields: id, name, dept, email, address

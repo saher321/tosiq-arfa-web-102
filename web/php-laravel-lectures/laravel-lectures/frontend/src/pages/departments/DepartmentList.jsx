@@ -11,11 +11,14 @@ const DepartmentList = () => {
     const [ departments, setDepartments ] = useState([])
     const [ isLoading, setIsLoading ] = useState(false)
 
+    const [isToggle, setIsToggle] = useState(false)
+
     const getDepartments = async () => {
         try {
             setIsLoading(true)
             const response = await axios.get(All_DEPT_API)
             if (response.data && response.data.departments) {
+                console.log(response.data.departments)
                 setDepartments(response.data.departments)
                 setIsLoading(false)
             } else {
@@ -56,6 +59,12 @@ const DepartmentList = () => {
         
     }
 
+    const handleToggleStudents = (e, id) => {
+        e.preventDefault();
+        console.log(id)
+        setIsToggle(!isToggle)
+    }
+
     return (
         <WebLayout>
 
@@ -73,6 +82,7 @@ const DepartmentList = () => {
                             <tr>
                                 <th className="px-6 py-3 font-medium">Dept. ID</th>
                                 <th className="px-6 py-3 font-medium">Name</th>
+                                <th className="px-6 py-3 font-medium">Students</th>
                                 <th className="px-6 py-3 font-medium">Created at</th>
                                 <th className="px-6 py-3 font-medium">Action</th>
                             </tr>
@@ -86,12 +96,20 @@ const DepartmentList = () => {
                                 >
                                     <td className="px-6 py-4 text-gray-700">{dept.id}</td>
                                     <td className="px-6 py-4 text-gray-700">{dept.name}</td>
+                                    <td className="px-6 py-4 text-gray-700">
+                                        {dept.students?.length > 0 ?
+                                            dept.students.map((student) => (
+                                                <span key={student.id} className="w-fit p-[2px] bg-gray-200 border border-gray-300 rounded my-1 text-xs block">{student.name}</span>
+                                            )):
+                                            <span>N/A</span>
+                                        }
+                                    </td>
                                     <td className="px-6 py-4 text-gray-500">{moment(dept.created_at).format('lll')}</td>
                                     <td className="px-6 py-4">
-                                        <button className="cursor-pointer text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+                                        {/* <button onClick={(e) => handleToggleStudents(e, dept.id)} className="cursor-pointer text-indigo-600 hover:text-indigo-800 text-sm font-medium">
                                             View
-                                        </button>
-                                        <span> | </span>
+                                        </button> */}
+                                        {/* <span> | </span> */}
                                         <button onClick={(e) => handleDelete(e, dept.id)} className="cursor-pointer text-indigo-600 hover:text-indigo-800 text-sm font-medium">
                                             Delete
                                         </button>
