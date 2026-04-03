@@ -26,6 +26,7 @@ backend pkgs:
 epxress     = URLS
 nodemon     = auto start of server
 dotenv      = credentials
+cors        = frontend, backend
 nodemailer  = sending email
 nanoid      = generate random (num,apl,sym) :: 32r202.
 jwt         = $f440f04r23rfu2f-23r23/22.2r23r2r2342.r23r2
