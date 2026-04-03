@@ -1,0 +1,38 @@
+Mern stack
+
+M = Mongodb         => database
+E = Expressjs
+R = Reactjs
+N = nodejs
+
+Databases
+
+MySQL
+Mongodb - No-SQL
+
+Collections (Students, deparmtent)
+    documents
+        name = "Ali"
+        age  = "34"
+
+app = Mongodb compass
+web = Mongdb atlas
+
+cmds: 
+    -> package.json
+        - npm init -y
+
+backend pkgs:
+epxress     = URLS
+nodemon     = auto start of server
+dotenv      = credentials
+nodemailer  = sending email
+nanoid      = generate random (num,apl,sym) :: 32r202.
+jwt         = $f440f04r23rfu2f-23r23/22.2r23r2r2342.r23r2
+mongoose    = db func(Eloquent)
+
+Method:
+GET
+POST
+DELETE
+PUT/PATCH
