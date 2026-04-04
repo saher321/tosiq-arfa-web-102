@@ -32,8 +32,73 @@ nanoid      = generate random (num,apl,sym) :: 32r202.
 jwt         = $f440f04r23rfu2f-23r23/22.2r23r2r2342.r23r2
 mongoose    = db func(Eloquent)
 
-Method:
-GET
-POST
-DELETE
-PUT/PATCH
+Method / RESTFULL APIS:
+GET         :: http://localhost:5000/todos
+POST        :: http://localhost:5000/todos/create
+DELETE      :: http://localhost:5000/todos/1, delete
+PUT/PATCH   :: http://localhost:5000/todos/fruit-list, update
+
+id => slug (Fruit list => fruit_list)
+
+PUT/PATCH   :: http://localhost:5000/users/1, statusUpdate
+-------------------------------------------------
+****** FOLDER STRUCTURE *******
+Mern stack::: (LMS)
+Entities: 
+    announcements
+    courses
+    employees
+    students
+    attandence
+    teachers
+    assignments
+    classes
+    accounts
+    users (admin, employee, student)
+
+app => todos.edu
+    backend
+        node_modules
+        controllers
+            - todo.controller.js
+        models
+            - todo.model.js
+        routes
+            - todo.route.js
+        
+        index.js
+        package.json
+
+        backend (MODULER appr.)
+            node_modules
+            modules
+                users
+                    user.controller.js
+                    user.model.js
+                    user.route.js
+
+                employees
+                    employee.controller.js
+                    employee.model.js
+                    employee.route.js
+
+                accounts
+                    accounts.controller.js
+                    accounts.model.js
+                    accounts.route.js
+
+                teachers
+                    teacher.controller.js
+                    teacher.model.js
+                    teacher.route.js
+            utils
+                generateOTP()
+                sendEmail()
+                slug(str)
+                    return slug :: fruit_list, fruit-list
+        index.js
+        package.json
+
+
+
+    client
