@@ -102,3 +102,10 @@ app => todos.edu
 
 
     client
+
+
+--- SOFTWARES --- 
+1. Postman
+    - https://www.postman.com/downloads/
+2. Mongodb compass
+    - https://www.mongodb.com/try/download/community
