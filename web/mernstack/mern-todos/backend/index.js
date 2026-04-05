@@ -4,6 +4,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import noteRoute from './modules/note/note.route.js'
+import { connectDB } from './config/db.js'
 
 dotenv.config()
 const app = express()
@@ -15,6 +16,8 @@ app.get('/', (req, res)=>{
     return res.send({status: true, message: "Server is started"})
 })
 
-app.listen( PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`)
-})
+connectDB().then(() => {
+    app.listen( PORT, () => {
+        console.log(`Server is running at http://localhost:${PORT}`)
+    })
+}) 
