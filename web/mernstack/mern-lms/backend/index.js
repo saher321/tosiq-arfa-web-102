@@ -3,13 +3,13 @@
 
 import express from 'express'
 import dotenv from 'dotenv'
-import noteRoute from './modules/note/note.route.js'
+import deptRoute from './modules/department/department.route.js'
 
 dotenv.config()
 const app = express()
 const PORT = process.env.PORT
-const PREFIX = '/api/v1'
-app.use( PREFIX, noteRoute)
+
+app.use('', deptRoute)
 
 app.get('/', (req, res)=>{
     return res.send({status: true, message: "Server is started"})
