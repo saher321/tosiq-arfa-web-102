@@ -5,10 +5,12 @@ import express from 'express'
 import dotenv from 'dotenv'
 import noteRoute from './modules/note/note.route.js'
 import { connectDB } from './config/db.js'
+import cors from 'cors'
 
 dotenv.config()
-const app = express()
 const PORT = process.env.PORT
+const app = express()
+app.use(cors())
 const PREFIX = '/api/v1'
 app.use( PREFIX, noteRoute)
 
