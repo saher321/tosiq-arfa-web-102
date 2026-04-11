@@ -13,3 +13,30 @@ export const notes = async (req, res) => {
         notesList
     })
 }
+
+export const del = async (req, res) => {
+    const { id } = req.params
+
+    if(!id){
+        return res.send({
+            status: false,
+            message: "Note id not provided"
+        })
+    }
+
+    try {
+        const note = await Note.findByIdAndDelete({_id: id})
+        if (!note) {
+            return res.send({
+                status: false,
+                message: "Note id not found"
+            })
+        } 
+        return res.send({
+            status: true,
+            message: "Note has been deleted"
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
