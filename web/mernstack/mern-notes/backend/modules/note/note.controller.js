@@ -14,6 +14,11 @@ export const notes = async (req, res) => {
     })
 }
 
+export const create = async (req, res) => {
+    const { title, content } = req.body
+    console.log(title, content)
+}
+
 export const del = async (req, res) => {
     const { id } = req.params
 
