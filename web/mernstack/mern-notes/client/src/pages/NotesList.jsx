@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
 import WebLayout from "../layouts/WebLayout";
 import axios from "axios";
-import { NOTE_DEL_API, NOTES_API } from "../utils/apis";
+import { NOTE_CREATE_API, NOTE_DEL_API, NOTES_API } from "../utils/apis";
 import toast from "react-hot-toast";
 import { NoteItem } from "../components/notes/NoteItem";
+import { useForm } from 'react-hook-form'
 
 export const NotesList = () => {
   const [notes, setNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [toggleModel, setToggleModel] = useState(false);
+  const { register, handleSubmit, reset, setValue } = useForm()
 
   const openModel = () => {
     setToggleModel(true);
   };
   const closeModel = () => {
     setToggleModel(false);
+    reset();
   };
 
   const getNotes = async () => {
@@ -53,6 +56,24 @@ export const NotesList = () => {
       console.log(error);
     }
   };
+
+  const saveNotes = async (data) => {
+    try {
+      const res = await axios.post(NOTE_CREATE_API, data)
+      if (res.data.status == true){
+        
+        toast.success(res.data.message)
+        closeModel();
+        getNotes();
+
+      } else{
+        toast.error(res.data.message)
+        return;
+      }
+    } catch (error) {
+      console.log("ERR: ", error)
+    }
+  }
 
   return (
     <WebLayout>
@@ -102,19 +123,19 @@ export const NotesList = () => {
         <div className="fixed inset-0 bg-black/10 backdrop-blur-[4px] z-40"></div>
       )}
       {toggleModel && (
-        
+
         <div className="z-50 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-sm max-w-lg rounded-lg border border-gray-200 overflow-hidden shadow bg-white p-4">
           <h2 className=" font-semibold mb-2">Add notes</h2>
-          <form>
+          <form onSubmit={handleSubmit(saveNotes)}>
             <div>
               <div>
                 <label>Title</label>
-                <input type="text" className="w-full block my-3 p-2 rounded-lg border border-gray-300 bg-gray-100" placeholder="Enter title" />
+                <input type="text" {...register("title")} className="w-full block my-3 p-2 rounded-lg border border-gray-300 bg-gray-100" placeholder="Enter title" />
               </div>
 
               <div>
                 <label>Content</label>
-                <textarea type="text" rows={5} cols={50} className="max-w-lg block my-3 p-2 rounded-lg border border-gray-300 bg-gray-100" placeholder="Enter content"></textarea>
+                <textarea type="text" {...register("content")} rows={5} cols={50} className="max-w-lg block my-3 p-2 rounded-lg border border-gray-300 bg-gray-100" placeholder="Enter content"></textarea>
               </div>
             </div>
 

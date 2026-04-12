@@ -16,7 +16,17 @@ export const notes = async (req, res) => {
 
 export const create = async (req, res) => {
     const { title, content } = req.body
-    console.log(title, content)
+
+    if(!title || !content) return res.send({
+        status: false,
+        message: "Form fields are required"
+    })
+
+    await Note.create({title, content})
+    return res.send({
+        status: true,
+        message: "Data saved"
+    })
 }
 
 export const del = async (req, res) => {
