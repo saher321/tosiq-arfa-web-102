@@ -40,7 +40,7 @@ export const del = async (req, res) => {
     }
 
     try {
-        const note = await Note.findByIdAndDelete({_id: id})
+        const note = await Note.findByIdAndDelete(data, {_id: id})
         if (!note) {
             return res.send({
                 status: false,
