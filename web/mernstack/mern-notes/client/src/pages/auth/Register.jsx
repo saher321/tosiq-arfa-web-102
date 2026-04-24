@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router'
 
 const Register = () => {
-  const { register, handleSubmit, reset, setValue } = useForm()
+  const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm()
   const navigate = useNavigate();
 
   const registerUser = async (data) => {
@@ -37,11 +37,14 @@ const Register = () => {
               <div>
                 <label>Email</label>
                 <input type="email" {...register("email")} className="w-full block my-3 p-2 rounded-lg border border-gray-300 bg-gray-100" placeholder="Enter email" />
+
+                {errors.email && <span>Enter correct email</span>}
               </div>
               
               <div>
                 <label>Password</label>
                 <input type="password" {...register("password")} className="w-full block my-3 p-2 rounded-lg border border-gray-300 bg-gray-100" placeholder="Enter password" autoComplete='off' />
+                
               </div>
             </div>
 
