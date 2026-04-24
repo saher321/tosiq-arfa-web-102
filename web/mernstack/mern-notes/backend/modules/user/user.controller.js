@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import User from "./user.model.js";
+import { sendEmail } from "../../utils/sendEmail.js";
 
 export const register = async (req, res) => {
     console.log(req.body)
@@ -21,7 +22,20 @@ export const register = async (req, res) => {
         const newuser = new User({name, email, password: encPassword})
         const result = await newuser.save()
 
+        const content = `
+        Hi ${name}, Thank you for choosing our platform.
+        <br />
+        Stay in touch.
+
+        <br />
+        Regards:
+        <strong>NOTLIFY</strong>
+        `
+
         if (result) {
+
+            sendEmail(email, "Thanks for your registration 🎉", content)
+
             return res.send({
                 status: true,
                 message: "Registered successfully"

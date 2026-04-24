@@ -4,15 +4,18 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import { REGISTER_API } from '../../utils/apis.js'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router'
 
 const Register = () => {
   const { register, handleSubmit, reset, setValue } = useForm()
+  const navigate = useNavigate();
 
   const registerUser = async (data) => {
     try {
       const response = await axios.post(REGISTER_API, data)
       if (response.data.status == true){
         toast.success(response.data.message)
+        navigate('/login')
       } else {
         toast.error(response.data.message)
       }
@@ -38,7 +41,7 @@ const Register = () => {
               
               <div>
                 <label>Password</label>
-                <input type="password" {...register("password")} className="w-full block my-3 p-2 rounded-lg border border-gray-300 bg-gray-100" placeholder="Enter password" />
+                <input type="password" {...register("password")} className="w-full block my-3 p-2 rounded-lg border border-gray-300 bg-gray-100" placeholder="Enter password" autoComplete='off' />
               </div>
             </div>
 
