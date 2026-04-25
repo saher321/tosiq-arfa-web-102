@@ -1,0 +1,6 @@
+user model
+    id, name, email, password,
+    is_verified=false, otp : 345939
+
+
+otp: 345939

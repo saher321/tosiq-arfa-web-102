@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import User from "./user.model.js";
 import { sendEmail } from "../../utils/sendEmail.js";
+import { generateOTP } from "../../utils/generateOTP.js";
 
 export const register = async (req, res) => {
     console.log(req.body)
@@ -55,4 +56,38 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     
+}
+
+export const forgotPassword = async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        const user = await User.findOne({email:email})
+        if (!user) {
+            return res.send({
+                status: false,
+                message: "User not exists with this email"
+            })
+        }
+
+        let otp = generateOTP()
+
+        user.otp = otp
+        user.is_otp_verified = false
+        user.save()
+        let content = `
+        Hi, ${user.name}, Here is your OTP code. <br>
+
+        code: <strong>${otp}</strong>
+        `
+        sendEmail(email, "Requested OTP for reset password", content)
+
+        return res.send({
+            status: true,
+            message: "Otp has been sent to your email"
+        })
+
+    } catch (error) {
+        console.log("ERR: ", error)
+    }
 }
