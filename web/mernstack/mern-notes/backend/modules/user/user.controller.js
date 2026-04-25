@@ -91,3 +91,53 @@ export const forgotPassword = async (req, res) => {
         console.log("ERR: ", error)
     }
 }
+
+
+export const resetPassword = async (req, res) => {
+    const { email, otp, newPassword } = req.body;
+    if (!otp || !newPassword) {
+        return res.send({
+            status: false,
+            message: "Please fill all the fields"
+        })
+    }
+    try {
+        const user = await User.findOne({email:email})
+        if (!user) {
+            return res.send({
+                status: false,
+                message: "User not exists with this email"
+            })
+        }
+
+        if (user.otp != otp) {
+            return res.send({
+                status: false,
+                message: "Given otp is not valid"
+            })            
+        }
+
+        
+        const randomStr = await bcrypt.genSalt(10);
+        const encPassword = await bcrypt.hash(newPassword, randomStr);
+
+        user.otp = ""
+        user.is_otp_verified = true
+        user.password = encPassword
+        user.save()
+
+        let content = `
+        Hi, ${user.name}, Your password has been changes successfully. <br>
+        `
+        sendEmail(email, "Password has been changed", content)
+
+        return res.send({
+            status: true,
+            message: "Password has been changed"
+        })
+
+    } catch (error) {
+        console.log("ERR: ", error)
+    }
+}
+

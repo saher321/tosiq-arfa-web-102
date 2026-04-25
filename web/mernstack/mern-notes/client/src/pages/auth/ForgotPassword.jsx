@@ -9,11 +9,12 @@ import { useNavigate } from 'react-router'
 const ForgotPassword = () => {
   const { register, handleSubmit, reset, setValue } = useForm()
   const navigate = useNavigate();
-  
+
   const forgotPassword = async (data) => {
     try {
       const response = await axios.post(FORGOT_API, data)
       if (response.data.status == true){
+        localStorage.setItem("forgotEmail", data.email)
         toast.success(response.data.message)
         navigate('/reset-password')
       } else {
@@ -23,6 +24,7 @@ const ForgotPassword = () => {
       console.log("ERR: ", error)
     }
   }
+
   return (
     <AuthLayout>
       <div className="w-[350px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-sm max-w-lg rounded-lg border border-gray-200 overflow-hidden shadow bg-white p-4">
