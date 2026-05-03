@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Modern and Simple Travel Destination Cards - Side by Side Comparison">
+    <title>Travel Cards — Modern vs Simple</title>
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f14;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* === Ambient Background Blobs === */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -20%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: floatBlob1 12s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -20%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: floatBlob2 15s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes floatBlob1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(60px, 40px) scale(1.1); }
+            66% { transform: translate(-30px, 60px) scale(0.95); }
+        }
+
+        @keyframes floatBlob2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-50px, -30px) scale(1.05); }
+            66% { transform: translate(40px, -50px) scale(0.9); }
+        }
+
+        /* === MODERN CARD (Left) === */
+        .card-modern {
+            position: relative;
+            width: 380px;
+            height: 500px;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.05);
+        }
+
+        .card-modern:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(99, 102, 241, 0.3), 0 0 0 1px rgba(255,255,255,0.1);
+        }
+
+        .card-modern .card-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&q=80') center/cover no-repeat;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .card-modern:hover .card-bg {
+            transform: scale(1.08);
+        }
+
+        /* Dark gradient overlay */
+        .card-modern .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(0, 0, 0, 0.1) 0%,
+                rgba(0, 0, 0, 0.2) 40%,
+                rgba(0, 0, 0, 0.75) 100%
+            );
+            z-index: 1;
+        }
+
+        /* Glassmorphism blur panel behind text */
+        .glass-panel {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 28px 24px 24px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            z-index: 2;
+        }
+
+        /* Top badge */
+        .card-modern .top-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.18);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .card-modern .favorite-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 3;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card-modern .favorite-btn:hover {
+            background: rgba(239, 68, 68, 0.7);
+            border-color: rgba(239, 68, 68, 0.8);
+            transform: scale(1.1);
+        }
+
+        .card-modern .rating-stars {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            margin-bottom: 8px;
+        }
+
+        .card-modern .rating-stars i {
+            color: #fbbf24;
+            font-size: 12px;
+        }
+
+        .card-modern .rating-stars span {
+            color: rgba(255,255,255,0.7);
+            font-size: 12px;
+            margin-left: 6px;
+            font-weight: 500;
+        }
+
+        .card-modern .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+
+        .card-modern .card-location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: rgba(255,255,255,0.65);
+            font-size: 13px;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+
+        .card-modern .card-location i {
+            font-size: 11px;
+            color: rgba(99, 102, 241, 0.9);
+        }
+
+        .card-modern .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-modern .card-price {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .card-modern .card-price span {
+            font-size: 13px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .card-modern .book-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: none;
+            border-radius: 14px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .card-modern .book-btn:hover {
+            background: linear-gradient(135deg, #818cf8, #a78bfa);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(99, 102, 241, 0.5);
+        }
+
+        /* === SIMPLE CARD (Right) === */
+        .card-simple {
+            width: 380px;
+            background: #1a1a24;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-simple:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.08);
+        }
+
+        .card-simple .image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+        }
+
+        .card-simple .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card-simple:hover .image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .card-simple .image-wrapper .simple-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            padding: 5px 12px;
+            background: rgba(16, 185, 129, 0.85);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .card-simple .image-wrapper .simple-heart {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .card-simple .image-wrapper .simple-heart:hover {
+            background: rgba(239, 68, 68, 0.8);
+            transform: scale(1.1);
+        }
+
+        .card-simple .simple-content {
+            padding: 22px 22px 24px;
+        }
+
+        .card-simple .simple-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .card-simple .simple-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .card-simple .simple-rating i {
+            color: #fbbf24;
+            font-size: 13px;
+        }
+
+        .card-simple .simple-rating span {
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+            font-weight: 500;
+            margin-left: 4px;
+        }
+
+        .card-simple .simple-duration {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: rgba(255,255,255,0.4);
+            font-size: 12px;
+        }
+
+        .card-simple .simple-duration i {
+            font-size: 12px;
+        }
+
+        .card-simple .simple-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #f0f0f5;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .card-simple .simple-location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: rgba(255,255,255,0.4);
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .card-simple .simple-location i {
+            font-size: 11px;
+            color: rgba(16, 185, 129, 0.8);
+        }
+
+        .card-simple .simple-divider {
+            width: 100%;
+            height: 1px;
+            background: rgba(255,255,255,0.06);
+            margin-bottom: 16px;
+        }
+
+        .card-simple .simple-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-simple .simple-price {
+            color: #f0f0f5;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .card-simple .simple-price span {
+            font-size: 13px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .card-simple .simple-book-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 20px;
+            background: transparent;
+            border: 1.5px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            color: #f0f0f5;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card-simple .simple-book-btn:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        /* === Labels === */
+        .card-label {
+            text-align: center;
+            margin-bottom: 16px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .label-modern {
+            color: rgba(129, 140, 248, 0.8);
+        }
+
+        .label-simple {
+            color: rgba(16, 185, 129, 0.7);
+        }
+
+        /* === Container === */
+        .cards-container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 48px;
+            padding: 40px;
+        }
+
+        /* === Pulse glow behind modern card === */
+        .modern-wrapper {
+            position: relative;
+        }
+
+        .modern-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+            border-radius: 40px;
+            filter: blur(30px);
+            z-index: -1;
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* === Responsive === */
+        @media (max-width: 860px) {
+            .cards-container {
+                flex-direction: column;
+                gap: 40px;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cards-container">
+        <!-- ===== MODERN CARD (Left) ===== -->
+        <div class="modern-wrapper">
+            <div class="card-label label-modern">
+                <i class="fa-solid fa-wand-magic-sparkles" style="margin-right: 4px;"></i> Modern
+            </div>
+            <div class="card-modern" id="card-modern">
+                <!-- Background Image -->
+                <div class="card-bg"></div>
+                <!-- Overlay -->
+                <div class="card-overlay"></div>
+
+                <!-- Top Badge -->
+                <div class="top-badge">
+                    <i class="fa-solid fa-fire"></i>
+                    Trending
+                </div>
+
+                <!-- Favorite Button -->
+                <button class="favorite-btn" id="modern-fav-btn" aria-label="Add to favorites">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+
+                <!-- Glass Panel Content -->
+                <div class="glass-panel">
+                    <div class="rating-stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                        <span>4.8 (2.4k reviews)</span>
+                    </div>
+                    <h2 class="card-title">New York City</h2>
+                    <div class="card-location">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Manhattan, United States
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-price">
+                            $1,200 <span>/ person</span>
+                        </div>
+                        <button class="book-btn" id="modern-book-btn">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SIMPLE CARD (Right) ===== -->
+        <div>
+            <div class="card-label label-simple">
+                <i class="fa-regular fa-gem" style="margin-right: 4px;"></i> Simple
+            </div>
+            <div class="card-simple" id="card-simple">
+                <!-- Image -->
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&q=80"
+                         alt="Golden Gate Bridge, San Francisco"
+                         loading="lazy">
+                    <div class="simple-badge">
+                        <i class="fa-solid fa-bolt" style="margin-right: 3px;"></i> Popular
+                    </div>
+                    <button class="simple-heart" id="simple-fav-btn" aria-label="Add to favorites">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </div>
+
+                <!-- Content -->
+                <div class="simple-content">
+                    <div class="simple-meta">
+                        <div class="simple-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <span>4.0</span>
+                        </div>
+                        <div class="simple-duration">
+                            <i class="fa-regular fa-clock"></i>
+                            5 Days Trip
+                        </div>
+                    </div>
+                    <h2 class="simple-title">San Francisco</h2>
+                    <div class="simple-location">
+                        <i class="fa-solid fa-location-dot"></i>
+                        California, United States
+                    </div>
+                    <div class="simple-divider"></div>
+                    <div class="simple-footer">
+                        <div class="simple-price">
+                            $890 <span>/ person</span>
+                        </div>
+                        <button class="simple-book-btn" id="simple-book-btn">
+                            Details
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Script -->
+    <script>
+        // Toggle favorite (heart) on both cards
+        document.querySelectorAll('#modern-fav-btn, #simple-fav-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('fa-regular')) {
+                    icon.classList.remove('fa-regular');
+                    icon.classList.add('fa-solid');
+                    icon.style.color = '#ef4444';
+                } else {
+                    icon.classList.remove('fa-solid');
+                    icon.classList.add('fa-regular');
+                    icon.style.color = '#fff';
+                }
+            });
+        });
+
+        // Subtle tilt effect on modern card
+        const modernCard = document.getElementById('card-modern');
+        modernCard.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -4;
+            const rotateY = ((x - centerX) / centerX) * 4;
+            this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-12px) scale(1.02)`;
+        });
+        modernCard.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+        });
+    </script>
+
+</body>
+</html>

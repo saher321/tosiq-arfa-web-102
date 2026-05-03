@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subway Surfers - Web 3D Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            margin: 0; 
+            overflow: hidden; 
+            background-color: #87CEEB;
+            font-family: 'Inter', sans-serif;
+            touch-action: none; /* Prevent scroll on mobile swipe */
+        }
+        #canvas-container { 
+            width: 100vw; 
+            height: 100vh; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            z-index: -1; 
+        }
+        .title-font {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 2px;
+        }
+        .text-stroke {
+            -webkit-text-stroke: 2px #000;
+        }
+        .hud { 
+            text-shadow: 2px 2px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, 1px 1px 0px #000; 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- UI Overlay (HUD) -->
+    <div id="ui" class="absolute top-0 left-0 w-full p-6 flex justify-between items-start pointer-events-none z-10">
+        <div class="flex flex-col items-start">
+            <span class="text-white text-xl font-black uppercase tracking-wider hud">Score</span>
+            <span id="score" class="text-white text-5xl font-black title-font text-stroke text-yellow-400">0</span>
+        </div>
+        <div class="flex flex-col items-end">
+            <span class="text-white text-xl font-black uppercase tracking-wider hud">Coins</span>
+            <span id="coins" class="text-white text-5xl font-black title-font text-stroke flex items-center gap-2">
+                <svg class="w-10 h-10 text-yellow-400 drop-shadow-md" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                0
+            </span>
+        </div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="start-screen" class="absolute inset-0 bg-gradient-to-b from-blue-500/90 to-blue-900/90 backdrop-blur-sm z-50 flex flex-col justify-center items-center text-center px-4">
+        <div class="relative mb-8 transform -skew-x-6 hover:scale-105 transition-transform duration-300">
+            <h1 class="text-8xl md:text-9xl font-black text-white title-font text-stroke shadow-black drop-shadow-2xl">
+                SUBWAY<br><span class="text-yellow-400">RUNNER</span>
+            </h1>
+            <div class="absolute -bottom-6 -right-4 bg-red-600 text-white font-bold px-4 py-1 rounded-full border-2 border-black transform rotate-12 title-font text-2xl">3D WEB</div>
+        </div>
+        
+        <p class="text-white text-xl md:text-2xl font-bold mb-12 max-w-lg hud uppercase tracking-wider">
+            Swipe or use Arrow Keys to dodge trains and collect coins!
+        </p>
+        
+        <button id="start-btn" class="group relative px-16 py-6 bg-yellow-400 text-black rounded-xl font-black text-4xl title-font uppercase tracking-widest border-4 border-black shadow-[8px_8px_0_#000] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0_#000] active:translate-x-2 active:translate-y-2 active:shadow-none transition-all">
+            Tap to Play
+            <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+        </button>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="game-over" class="hidden absolute inset-0 bg-black/80 z-50 flex-col justify-center items-center backdrop-blur-md">
+        <h1 class="text-8xl font-black mb-6 text-red-500 title-font text-stroke animate-bounce">CAUGHT!</h1>
+        
+        <div class="bg-blue-900 border-4 border-black p-8 rounded-3xl text-center mb-10 w-full max-w-md shadow-[8px_8px_0_#000] transform -skew-x-2">
+            <p class="text-blue-300 text-2xl title-font uppercase tracking-wider mb-1 text-stroke">Final Score</p>
+            <p id="final-score" class="text-7xl font-bold text-yellow-400 title-font text-stroke mb-6">0</p>
+            
+            <p class="text-blue-300 text-2xl title-font uppercase tracking-wider mb-1 text-stroke">Coins Collected</p>
+            <div class="flex justify-center items-center gap-3">
+                <svg class="w-10 h-10 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                <p id="final-coins" class="text-5xl font-bold text-white title-font text-stroke">0</p>
+            </div>
+        </div>
+        
+        <button id="restart-btn" class="group px-12 py-5 bg-green-500 text-white rounded-xl border-4 border-black font-black text-3xl title-font uppercase tracking-widest shadow-[6px_6px_0_#000] hover:translate-x-1 hover:translate-y-1 hover:shadow-[3px_3px_0_#000] active:translate-x-2 active:translate-y-2 active:shadow-none transition-all flex items-center gap-4">
+            <svg class="w-8 h-8 group-hover:animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+            Run Again
+        </button>
+    </div>
+
+    <div id="canvas-container"></div>
+
+    <script>
+        // --- Game Logic & Variables ---
+        const laneWidth = 3;
+        const speedInitial = 0.4;
+        let speed = speedInitial;
+        let score = 0;
+        let coins = 0;
+        let isGameOver = true;
+        let currentLane = 0; // -1: Left, 0: Center, 1: Right
+        let isJumping = false;
+        
+        let obstacles = [];
+        let collectibles = [];
+        let groundTiles = [];
+        let gameLoopId;
+
+        // --- Three.js Setup ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color('#87CEEB'); // Sky Blue
+        scene.fog = new THREE.Fog('#87CEEB', 30, 100);
+
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 150);
+        camera.position.set(0, 6, 12);
+        camera.lookAt(0, 1, -20);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Perf optimization
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        container.appendChild(renderer.domElement);
+
+        // --- Lighting ---
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+        scene.add(ambientLight);
+
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(20, 40, 20);
+        dirLight.castShadow = true;
+        dirLight.shadow.mapSize.width = 1024;
+        dirLight.shadow.mapSize.height = 1024;
+        dirLight.shadow.camera.near = 0.5;
+        dirLight.shadow.camera.far = 100;
+        dirLight.shadow.camera.left = -30;
+        dirLight.shadow.camera.right = 30;
+        dirLight.shadow.camera.top = 30;
+        dirLight.shadow.camera.bottom = -30;
+        scene.add(dirLight);
+
+        // --- Materials ---
+        const coinMat = new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 0.8, roughness: 0.2 });
+        const barricadeMat = new THREE.MeshStandardMaterial({ color: 0xff6600, roughness: 0.4 });
+        
+        // --- Create Player (Humanoid Figure) ---
+        const playerGroup = new THREE.Group();
+        
+        // Body (Jacket/Shirt)
+        const bodyGeo = new THREE.BoxGeometry(0.8, 1.2, 0.5);
+        const bodyMat = new THREE.MeshStandardMaterial({ color: 0xef4444 }); // Red jacket
+        const body = new THREE.Mesh(bodyGeo, bodyMat);
+        body.position.y = 1.1;
+        
+        // Head
+        const headGeo = new THREE.BoxGeometry(0.6, 0.6, 0.6);
+        const headMat = new THREE.MeshStandardMaterial({ color: 0xffdbac }); // Skin tone
+        const head = new THREE.Mesh(headGeo, headMat);
+        head.position.y = 2.0;
+
+        // Legs
+        const legGeo = new THREE.BoxGeometry(0.3, 0.8, 0.3);
+        const legMat = new THREE.MeshStandardMaterial({ color: 0x1d4ed8 }); // Blue jeans
+        const leftLeg = new THREE.Mesh(legGeo, legMat);
+        leftLeg.position.set(-0.2, 0.4, 0);
+        const rightLeg = new THREE.Mesh(legGeo, legMat);
+        rightLeg.position.set(0.2, 0.4, 0);
+
+        playerGroup.add(body);
+        playerGroup.add(head);
+        playerGroup.add(leftLeg);
+        playerGroup.add(rightLeg);
+        
+        // Enable shadows for player parts
+        playerGroup.traverse(child => { if(child.isMesh) { child.castShadow = true; child.receiveShadow = true; } });
+        
+        playerGroup.position.set(0, 0, 0);
+        scene.add(playerGroup);
+
+        // Player animation state
+        let legSwing = 0;
+
+        // --- World Generation (Train Tracks) ---
+        function createTrackSegment(zPos) {
+            const group = new THREE.Group();
+            
+            // Generate 3 lanes
+            for (let i = 0; i < 3; i++) {
+                const laneX = (i - 1) * laneWidth;
+                
+                // Wooden sleepers
+                for (let j = 0; j < 4; j++) {
+                    const plank = new THREE.Mesh(
+                        new THREE.BoxGeometry(2.5, 0.1, 0.4),
+                        new THREE.MeshStandardMaterial({ color: 0x4a3b2c }) // Wood
+                    );
+                    plank.position.set(laneX, 0.05, zPos - j + 1.5);
+                    plank.receiveShadow = true;
+                    group.add(plank);
+                }
+                
+                // Steel rails
+                const railGeo = new THREE.BoxGeometry(0.1, 0.15, 4);
+                const railMat = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.6 });
+                
+                const railLeft = new THREE.Mesh(railGeo, railMat);
+                railLeft.position.set(laneX - 0.8, 0.15, zPos);
+                railLeft.castShadow = true;
+                group.add(railLeft);
+                
+                const railRight = new THREE.Mesh(railGeo, railMat);
+                railRight.position.set(laneX + 0.8, 0.15, zPos);
+                railRight.castShadow = true;
+                group.add(railRight);
+            }
+            
+            // Ground layer underneath
+            const ground = new THREE.Mesh(
+                new THREE.BoxGeometry(laneWidth * 3.5, 0.5, 4),
+                new THREE.MeshStandardMaterial({ color: 0x2e353b }) // Dark gravel
+            );
+            ground.position.set(0, -0.25, zPos);
+            ground.receiveShadow = true;
+            group.add(ground);
+            
+            scene.add(group);
+            groundTiles.push(group);
+        }
+
+        // Initialize ground segments
+        for (let i = 0; i < 30; i++) {
+            createTrackSegment(-i * 4);
+        }
+
+        // --- Spawner ---
+        function spawnObject() {
+            if (isGameOver) return;
+            
+            // Determine how many lanes to block (1 or 2)
+            const numObstacles = Math.random() > 0.6 ? 2 : 1;
+            const shuffledLanes = [-1, 0, 1].sort(() => 0.5 - Math.random());
+            const spawnZ = -120; // Spawn far ahead
+            
+            for(let i=0; i<numObstacles; i++) {
+                const laneIndex = shuffledLanes[i];
+                const xPos = laneIndex * laneWidth;
+                
+                // 60% Train, 40% Barricade
+                if (Math.random() < 0.6) {
+                    // Spawn Train
+                    const trainGroup = new THREE.Group();
+                    const trainColors = [0xef4444, 0x22c55e, 0x3b82f6, 0xec4899]; // Red, Green, Blue, Pink
+                    const color = trainColors[Math.floor(Math.random() * trainColors.length)];
+                    
+                    const trainBody = new THREE.Mesh(
+                        new THREE.BoxGeometry(2.6, 3.5, 12), 
+                        new THREE.MeshStandardMaterial({ color: color, roughness: 0.3 })
+                    );
+                    trainBody.position.y = 1.75;
+                    trainBody.castShadow = true;
+                    trainBody.receiveShadow = true;
+                    trainGroup.add(trainBody);
+                    
+                    // Windshield
+                    const windowMesh = new THREE.Mesh(
+                        new THREE.PlaneGeometry(2.2, 1.2), 
+                        new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 0.9 })
+                    );
+                    windowMesh.position.set(0, 2.5, 6.01); // Front face
+                    trainGroup.add(windowMesh);
+
+                    // Headlights
+                    const lightMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 1 });
+                    const lLight = new THREE.Mesh(new THREE.CircleGeometry(0.2, 16), lightMat);
+                    lLight.position.set(-0.8, 1, 6.01);
+                    trainGroup.add(lLight);
+                    const rLight = new THREE.Mesh(new THREE.CircleGeometry(0.2, 16), lightMat);
+                    rLight.position.set(0.8, 1, 6.01);
+                    trainGroup.add(rLight);
+                    
+                    trainGroup.position.set(xPos, 0, spawnZ);
+                    scene.add(trainGroup);
+                    obstacles.push(trainGroup);
+                } else {
+                    // Spawn Barricade (jumpable)
+                    const barricade = new THREE.Mesh(
+                        new THREE.BoxGeometry(2.6, 1.2, 0.5), 
+                        barricadeMat
+                    );
+                    barricade.position.set(xPos, 0.6, spawnZ);
+                    barricade.castShadow = true;
+                    barricade.receiveShadow = true;
+                    scene.add(barricade);
+                    obstacles.push(barricade);
+                }
+            }
+            
+            // Spawn Coins in the empty lane
+            if (numObstacles === 1 || Math.random() > 0.3) {
+                const coinLane = shuffledLanes[2]; // Guaranteed empty if 2 obstacles
+                const xPos = coinLane * laneWidth;
+                
+                // Spawn a line of 3 to 5 coins
+                const coinCount = Math.floor(Math.random() * 3) + 3;
+                for(let j=0; j<coinCount; j++) {
+                    const coin = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 0.1, 16), coinMat);
+                    coin.position.set(xPos, 1.2, spawnZ - (j * 2.5));
+                    coin.rotation.x = Math.PI / 2;
+                    coin.castShadow = true;
+                    scene.add(coin);
+                    collectibles.push(coin);
+                }
+            }
+        }
+
+        let spawnTimer = 0;
+        let spawnInterval = 80;
+
+        // --- Controls ---
+        function moveLeft() {
+            if (currentLane > -1 && !isGameOver) {
+                currentLane--;
+                gsap.to(playerGroup.position, { x: currentLane * laneWidth, duration: 0.2, ease: "power2.out" });
+                // Slight tilt effect
+                gsap.to(playerGroup.rotation, { z: 0.2, yoyo: true, repeat: 1, duration: 0.1 });
+            }
+        }
+
+        function moveRight() {
+            if (currentLane < 1 && !isGameOver) {
+                currentLane++;
+                gsap.to(playerGroup.position, { x: currentLane * laneWidth, duration: 0.2, ease: "power2.out" });
+                gsap.to(playerGroup.rotation, { z: -0.2, yoyo: true, repeat: 1, duration: 0.1 });
+            }
+        }
+
+        function jump() {
+            if (!isJumping && !isGameOver) {
+                isJumping = true;
+                // Jump arc
+                gsap.to(playerGroup.position, { 
+                    y: 3.5, 
+                    duration: 0.35, 
+                    ease: "power1.out", 
+                    yoyo: true, 
+                    repeat: 1,
+                    onComplete: () => { isJumping = false; }
+                });
+                // Front flip
+                gsap.to(playerGroup.rotation, { x: -Math.PI * 2, duration: 0.7, ease: "power1.inOut", onComplete: () => { playerGroup.rotation.x = 0; } });
+            }
+        }
+
+        // Keyboard
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'a') moveLeft();
+            if (e.key === 'ArrowRight' || e.key === 'd') moveRight();
+            if (e.key === 'ArrowUp' || e.key === 'w' || e.key === ' ') jump();
+        });
+
+        // Touch (Swipe)
+        let touchStartX = 0;
+        let touchStartY = 0;
+        window.addEventListener('touchstart', e => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        });
+        
+        window.addEventListener('touchend', e => {
+            if(isGameOver) return;
+            let touchEndX = e.changedTouches[0].clientX;
+            let touchEndY = e.changedTouches[0].clientY;
+            
+            let diffX = touchEndX - touchStartX;
+            let diffY = touchEndY - touchStartY;
+
+            if (Math.abs(diffX) > Math.abs(diffY)) { // Horizontal
+                if (diffX > 40) moveRight();
+                else if (diffX < -40) moveLeft();
+            } else { // Vertical
+                if (diffY < -40) jump();
+            }
+        });
+
+        // Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // --- Game State Management ---
+        const scoreEl = document.getElementById('score');
+        const coinsEl = document.getElementById('coins');
+        const gameOverScreen = document.getElementById('game-over');
+        const startScreen = document.getElementById('start-screen');
+        const finalScoreEl = document.getElementById('final-score');
+        const finalCoinsEl = document.getElementById('final-coins');
+
+        document.getElementById('start-btn').addEventListener('click', startGame);
+        document.getElementById('restart-btn').addEventListener('click', startGame);
+
+        function startGame() {
+            startScreen.classList.add('hidden');
+            gameOverScreen.classList.add('hidden');
+            gameOverScreen.classList.remove('flex');
+            
+            isGameOver = false;
+            score = 0;
+            coins = 0;
+            speed = speedInitial;
+            currentLane = 0;
+            spawnTimer = 0;
+            
+            playerGroup.position.set(0, 0, 0);
+            playerGroup.rotation.set(0, 0, 0);
+            
+            scoreEl.innerText = score;
+            coinsEl.innerHTML = `<svg class="w-10 h-10 text-yellow-400 drop-shadow-md" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" fill-rule="evenodd"></path></svg> 0`;
+
+            // Clear entities
+            obstacles.forEach(o => scene.remove(o));
+            collectibles.forEach(c => scene.remove(c));
+            obstacles = [];
+            collectibles = [];
+            
+            // Reset track positions
+            groundTiles.forEach((g, i) => {
+                g.position.z = -i * 4;
+            });
+            
+            if(gameLoopId) cancelAnimationFrame(gameLoopId);
+            animate();
+        }
+
+        function triggerGameOver() {
+            isGameOver = true;
+            
+            // Death animation (fall backwards)
+            gsap.to(playerGroup.rotation, { x: Math.PI / 2, duration: 0.5, ease: "power2.out" });
+            gsap.to(playerGroup.position, { z: playerGroup.position.z + 5, y: 0.5, duration: 0.5, ease: "power2.out" });
+            
+            setTimeout(() => {
+                gameOverScreen.classList.remove('hidden');
+                gameOverScreen.classList.add('flex');
+                finalScoreEl.innerText = Math.floor(score);
+                finalCoinsEl.innerText = coins;
+            }, 800);
+        }
+
+        // --- Main Game Loop ---
+        function animate() {
+            if (isGameOver) return;
+            gameLoopId = requestAnimationFrame(animate);
+
+            // Scoring & Speed Progression
+            score += speed * 1.5;
+            scoreEl.innerText = Math.floor(score);
+            speed += 0.0001; // Accelerate over time
+
+            // Run animation
+            if(!isJumping) {
+                legSwing += 0.3;
+                leftLeg.rotation.x = Math.sin(legSwing) * 0.5;
+                rightLeg.rotation.x = Math.sin(legSwing + Math.PI) * 0.5;
+            } else {
+                leftLeg.rotation.x = -0.5;
+                rightLeg.rotation.x = -0.5;
+            }
+
+            // Move Environment
+            groundTiles.forEach(g => {
+                g.position.z += speed;
+                if (g.position.z > 12) {
+                    g.position.z -= 120; // Recycle to back
+                }
+            });
+
+            // Spawning Logic
+            spawnTimer++;
+            const currentInterval = Math.max(30, spawnInterval - (speed * 50)); // Spawn faster as speed increases
+            if (spawnTimer >= currentInterval) {
+                spawnObject();
+                spawnTimer = 0;
+            }
+
+            // --- Collision Detection ---
+            // Create a slightly smaller bounding box for the player for fair hit detection
+            const playerBox = new THREE.Box3().setFromObject(playerGroup);
+            playerBox.expandByScalar(-0.25); // Forgiveness margin
+
+            // Obstacles
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                const obs = obstacles[i];
+                obs.position.z += speed;
+
+                const obsBox = new THREE.Box3().setFromObject(obs);
+                obsBox.expandByScalar(-0.1);
+
+                if (playerBox.intersectsBox(obsBox)) {
+                    triggerGameOver();
+                    return;
+                }
+
+                if (obs.position.z > 15) {
+                    scene.remove(obs);
+                    obstacles.splice(i, 1);
+                }
+            }
+
+            // Coins
+            for (let i = collectibles.length - 1; i >= 0; i--) {
+                const coin = collectibles[i];
+                coin.position.z += speed;
+                coin.rotation.y += 0.1; // Rotate coin
+
+                const coinBox = new THREE.Box3().setFromObject(coin);
+
+                if (playerBox.intersectsBox(coinBox)) {
+                    coins++;
+                    coinsEl.innerHTML = `<svg class="w-10 h-10 text-yellow-400 drop-shadow-md" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" fill-rule="evenodd"></path></svg> ${coins}`;
+                    
+                    // Collect effect
+                    gsap.to(coin.scale, { x: 0, y: 0, z: 0, duration: 0.2 });
+                    gsap.to(coin.position, { y: coin.position.y + 2, duration: 0.2, onComplete: () => {
+                        scene.remove(coin);
+                    }});
+                    collectibles.splice(i, 1);
+                    continue;
+                }
+
+                if (coin.position.z > 15) {
+                    scene.remove(coin);
+                    collectibles.splice(i, 1);
+                }
+            }
+
+            // Camera shake effect on high speeds
+            if(speed > 0.6) {
+                camera.position.x = (Math.random() - 0.5) * 0.05;
+                camera.position.y = 6 + (Math.random() - 0.5) * 0.05;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // Render first frame
+        renderer.render(scene, camera);
+
+    </script>
+</body>
+</html>
