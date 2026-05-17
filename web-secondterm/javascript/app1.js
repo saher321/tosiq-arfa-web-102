@@ -11,5 +11,5 @@ function convertToC() {
 
     let f = (c * 9/5) + 32
 
-    result.innerText = f;
+    result.value = f;
 }
