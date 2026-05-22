@@ -8,6 +8,12 @@ function applyTheme() {
     document.body.style.backgroundColor = bgClr
 
     
+    let clr = document.getElementById("txtClr")
+    let bClr = document.getElementById("bgClr")
+
+    clr.value = txtClr
+    bClr.value = bgClr
+
 }
 
 function saveTheme() {
