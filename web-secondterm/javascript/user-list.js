@@ -35,3 +35,23 @@ function filterUsers() {
         showData(filteredData)
     }
 }
+
+function searchByText() {
+    let text = document.getElementById("searchtext").value
+    
+    let userlist = document.getElementById("userlist")
+    userlist.innerHTML = ""
+
+    // s1 = this is formal text
+    // s2 = formal => s1.includes()
+    const filteredData = users.filter((user) => 
+        user.name.toLowerCase().includes(text.toLowerCase()) 
+    )
+
+    if (text == "") {
+        showData(users)
+    } else {
+        showData(filteredData)
+    }
+
+}
