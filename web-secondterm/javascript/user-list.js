@@ -1,3 +1,11 @@
+function addNewItem() {
+    let newitem = document.getElementById("newitem")
+    let list = document.getElementById("list")
+
+    list.innerHTML += `<option> ${newitem.value} </option>`
+    newitem.value = ""
+}
+
 const users = [
     { id: 2032, name: "Martha", role: "Vendor"},
     { id: 9763, name: "John", role: "Admin"},
