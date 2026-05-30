@@ -1,12 +1,12 @@
-import Navbar from '@/app/components/Navbar'
+
+import WebLayout from '@/app/layouts/WebLayout'
 import React from 'react'
 
 const page = () => {
   return (
-    <div>
-      <Navbar />
+    <WebLayout>
       About page
-    </div>
+    </WebLayout>
   )
 }
 
