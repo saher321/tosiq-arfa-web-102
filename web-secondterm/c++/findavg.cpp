@@ -4,20 +4,20 @@ using namespace std;
 
 int main(){
 	int total = 500, sum = 0, english, urdu, math, sst, chemistry;
-	float avg;
-	int prcnt;
+	float avg, prcnt;
 	
-	english 	= 78;
+	english 	= 48;
 	urdu 		= 66;
-	math 		= 89;
-	sst 		= 90;
+	math 		= 69;
+	sst 		= 94;
 	chemistry 	= 95;	
 	
 	sum 	= english + urdu + math + sst + chemistry;
-	prcnt 	= 418/500;
+	prcnt 	= (sum * 100 ) / total;
 	avg 	= sum / 5;
 	
-	cout << "Percentage of: " << prcnt << endl;
+	cout << "Sum of all subjects: " << sum << endl;
+	cout << "Percentage of: " << prcnt << "%" << endl;
 	cout << "Average of 5 subjects is: " << avg << endl;
 	
 }
