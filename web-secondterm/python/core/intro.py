@@ -40,3 +40,7 @@ x       = 3.4
 # cel = float(input("Enter celsius value: "))
 # fahr = (cel * 9/5) + 32
 # print("Fahrenheit value is: ", fahr)
+
+# Problem: Take marks of 5 subjects one by one
+# and print its sum & average
+# total marks: 500
