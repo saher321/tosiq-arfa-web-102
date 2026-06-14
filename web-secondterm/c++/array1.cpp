@@ -3,11 +3,18 @@
 using namespace std;
 
 int main() {
-	int arr[5] = {40, 32, 67, 88, -23};
+	string arr[5] = {};
+	int sum = 0;
+	int i;
 	
 //	cout << "Value: " << arr[2];
-	
-	for (int i = 0; i < 5; i++ ) {
+
+	for (i = 0; i < 5; i++ ) {
+		cout << "Enter city name: ";
+		cin >> arr[i];
+	}
+	cout << endl << "*** RESULT ***" << endl;
+	for (i = 0; i < 5; i++ ) {
 		cout << arr[i] << endl;
 	}
 }
