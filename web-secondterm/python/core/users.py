@@ -35,3 +35,6 @@ print(users)
 # Passw: gul123
 #
 # User 2
+# Name: Alex
+# Email: alex@company.com
+# Passw: alex321
