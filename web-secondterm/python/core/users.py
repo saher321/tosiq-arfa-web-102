@@ -1,4 +1,4 @@
-
+# import userCrudLib
 # students = []
 # while True:
 #   name = str(input("Enter Student name: "))
@@ -16,13 +16,13 @@ while True:
   email = str(input("Enter user email: "))
   passw = str(input("Enter user passw: "))
 
+  # users = userCrudLib.addUser(users, name, email, passw)
   userData = { "name": name, "email": email, "passw": passw }
   users.append(userData)
 
   option = str(input("Continue (y/n)? "))
   if option == "n":
     break
-
 
 print("****** User List ******")
 print(users)
