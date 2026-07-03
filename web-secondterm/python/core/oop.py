@@ -15,7 +15,10 @@ u1 = User("Alexa", 44)
 u2 = User("Spiderman", 77)
 u3 = User("John snow", 34)
 u4 = User("Thor", 1999)
-
+# u5 = User()
+# u5.name = "New name"
+# u5.age = 5
+# u5.information()
 # print(f"My name is {u.name} and my age is {u.age}")
 u1.information()
 u2.information()
