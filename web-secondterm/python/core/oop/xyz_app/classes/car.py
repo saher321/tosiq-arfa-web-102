@@ -2,7 +2,7 @@ class Car: # parent class
     # def __init__(self, make, year):
     #     self.make = make
     #     self.year = year
-    def start(slef, carname):
+    def start(self, carname):
         print(f"{carname} is started")
 
 class ElectricCar(Car): # child class
