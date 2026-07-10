@@ -1,17 +1,21 @@
-# def my_dec(func):
-#     def innerFunction():
-#         print("Welcome back!")
-#         func()
-#         print("Thanks for working")
-#     return innerFunction
+# Youtube video url: https://www.youtube.com/watch?v=zgUxviAqrLU
+def dec(func):
+    def innerFunc(n):
+        print("Welcome")
+        func(n)
+        print("Thank you!")
+    return innerFunc
 
-# @my_dec
-# def greetings(msg):
-#     print(msg)
+@dec
+def userInfo(username):
+    print(f"User name is {username}")
 
-# greetings("Good evening...")
+username = "akme242"
+userInfo(username)
 
-# output
-# Welcome back!
-# Good evening...
-# Thanks for working
+@dec
+def hello(name):
+    print(f"Hello from simple method , {name}")
+
+name = "Ali"
+hello(name)
