@@ -21,6 +21,16 @@ def showText():
 showText()
 
 # with open('filing1.txt', "r") as file:
-#     print(f" File with keyword: {file}")
+#     print(f" File with keyword: {file.read()}")
 
+# **************10 july ASSIGNMENT**************
+# create user list in file using filing concept
+# store user record like:
+# user name
+# user email
+# user password
 
+# then print all at once when 
+# user press n to no more add data
+
+# ref: users.py
