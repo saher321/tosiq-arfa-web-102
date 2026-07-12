@@ -5,3 +5,14 @@
 OOP
  1) polymorphism (overriding, overloading)
  2) ABS(abstractmethod)
+
+ ****************************
+
+ py_dev
+    links.txt
+    Django
+        - api
+        - ui
+    FastApi
+        - api
+        - ui
