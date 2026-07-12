@@ -1,3 +1,7 @@
 1 - getter setter 
 2 - inheritance
 3 - decorators
+
+OOP
+ 1) polymorphism
+ 2) ABS(abstructmethod)
