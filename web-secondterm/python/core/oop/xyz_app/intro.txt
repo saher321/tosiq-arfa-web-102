@@ -3,5 +3,5 @@
 3 - decorators
 
 OOP
- 1) polymorphism
- 2) ABS(abstructmethod)
+ 1) polymorphism (overriding, overloading)
+ 2) ABS(abstractmethod)
