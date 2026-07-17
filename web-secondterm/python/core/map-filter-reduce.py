@@ -17,6 +17,28 @@ total = reduce(lambda x, sum: sum+x, numbers)
 
 print(f"sum of numbers: {total}")
 
+# map assignment
+# employees = [
+#     {"name": "Tariq", "designation": "HR"},
+#     {"name": "Afzal", "designation": "Staff"},
+#     {"name": "Ali", "designation": "Manager"},
+#     {"name": "Zia", "designation": "Staff"}
+# ]
+# output
+# all list of dictionaries
+
+# filter assignment
+# employees = [
+#     {"name": "Tariq", "designation": "HR"},
+#     {"name": "Afzal", "designation": "Staff"},
+#     {"name": "Ali", "designation": "Manager"},
+#     {"name": "Zia", "designation": "Staff"}
+# ]
+# output
+# [
+#     {"name": "Afzal", "designation": "Staff"},
+#     {"name": "Zia", "designation": "Staff"}
+# ]
 
 # reduce asignment
 # sales = [
