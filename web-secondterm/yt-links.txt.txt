@@ -1,0 +1,2 @@
+17 July, 2026 (map, filter, reduce)
+	- https://www.youtube.com/watch?v=X6D2ASrAuJw

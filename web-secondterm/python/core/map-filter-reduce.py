@@ -42,11 +42,12 @@ print(f"sum of numbers: {total}")
 
 # reduce asignment
 # sales = [
-# {month: "Jan", profit: 45000},
-# {month: "Feb", profit: 5000},
-# {month: "Mar", profit: 7000},
-# {month: "April", profit: 3000},
+#   {month: "Jan", profit: 45000},
+#   {month: "Feb", profit: 5000},
+#   {month: "Mar", profit: 7000},
+#   {month: "April", profit: 3000},
 # ]
+# sale["profit"]
 
 # output: 
 # Profit of 12 month sales is: 60000
