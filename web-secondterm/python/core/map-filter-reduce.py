@@ -13,7 +13,7 @@ filteredArr = list(filter(lambda x: x%2 == 1, numbers))
 # print(filteredArr)
 
 # arr.reduce((sum, x) => sum+x) # 15
-total = reduce(lambda x, sum: sum+x, numbers)
+total = reduce(lambda x, sum: sum+x, numbers, 0)
 
 print(f"sum of numbers: {total}")
 
