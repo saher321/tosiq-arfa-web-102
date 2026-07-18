@@ -1,2 +1,5 @@
 17 July, 2026 (map, filter, reduce)
 	- https://www.youtube.com/watch?v=X6D2ASrAuJw
+
+18 July, 2026 (python basic half coding)
+	- https://www.youtube.com/watch?v=g4fKFWDGaMA
