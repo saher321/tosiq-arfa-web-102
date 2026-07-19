@@ -3,3 +3,6 @@
 
 18 July, 2026 (python basic half coding)
 	- https://www.youtube.com/watch?v=g4fKFWDGaMA
+
+19 July, 2026 (python loop, map-filter-reduce, array, filing, decorators, oop)
+	- https://www.youtube.com/watch?v=ZUU2c4Lgosk
