@@ -15,9 +15,9 @@ class Arithmatic:
         return a-b
 
 class Math:
-    def pow(self, a, n):
-        for i in range(1, n):
-            a = a*a
+    def pow(self, base, expo):
+        result = 1
+        for i in range(expo):
+            result = result * base
 
-        return a
-
+        return result

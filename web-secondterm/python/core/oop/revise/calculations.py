@@ -9,4 +9,4 @@ m1 = Math()
 result = m1.pow(3, 3)
 # 3x3x3
 # 27
-print(f"Power of 3 is {result}")
+print(f"Answer is {result}")
