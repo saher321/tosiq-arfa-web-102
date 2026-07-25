@@ -6,3 +6,6 @@
 
 19 July, 2026 (python loop, map-filter-reduce, array, filing, decorators, oop)
 	- https://www.youtube.com/watch?v=ZUU2c4Lgosk
+
+25 July, 2026 (oop revise)
+	- https://www.youtube.com/watch?v=b4Jjcaurlq4
