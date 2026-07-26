@@ -17,16 +17,20 @@ Step #2:
         cmd: python -m venv env
 Step #3:
     -> activate this venv
-        cmd: ./env/Scripts/activate
+        cmd: ./env/Scripts/activate.ps1
 
 Step #4:
-    -> install django pkg
-     cmd: python install django
+    -> to install django pkg
+     cmd: pip install django
 
 Step #5:
-    -> install django framework
+    -> to install django framework
      cmd: django-admin startproject projectname .
 
 Step #6:
     -> run project
      cmd: python manage.py runserver
+
+Step #7:
+    -> to stop / close / De-activate venv
+     cmd: deactivate
