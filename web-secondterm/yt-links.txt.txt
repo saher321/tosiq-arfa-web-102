@@ -9,3 +9,6 @@
 
 25 July, 2026 (oop revise)
 	- https://www.youtube.com/watch?v=b4Jjcaurlq4
+
+26 July, 2026 (django intro + installation)
+	- https://www.youtube.com/watch?v=5LLWIr_sRjw
