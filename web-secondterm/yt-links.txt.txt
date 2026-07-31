@@ -12,3 +12,6 @@
 
 26 July, 2026 (django intro + installation)
 	- https://www.youtube.com/watch?v=5LLWIr_sRjw
+
+31 July, 2026 (django, application)
+	- https://www.youtube.com/watch?v=28o6gmc9esM
