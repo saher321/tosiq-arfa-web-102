@@ -31,6 +31,22 @@ Step #6:
     -> run project
      cmd: python manage.py runserver
 
-Step #7:
+Step #7: (if you are done with your work)
     -> to stop / close / De-activate venv
      cmd: deactivate
+
+Step #8:
+    -> to create application in django project
+     cmd: django-admin startapp app_name
+
+Step #9:
+    -> add schema in related model.py file
+     create class of related app
+     E.G: class Employee():
+     ref: see my project1 folder
+
+Step #10:
+    -> make sure that your app has been added or not in project folder (settings.py)
+    -> to make migration
+     cmd: python manage.py makemigrations
+     Then, cmd: pythone manage.py migrate
