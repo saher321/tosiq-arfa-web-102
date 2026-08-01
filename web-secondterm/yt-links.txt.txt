@@ -15,3 +15,6 @@
 
 31 July, 2026 (django, application)
 	- https://www.youtube.com/watch?v=28o6gmc9esM
+
+1 August, 2026 (django-admin, templates)
+	- https://www.youtube.com/watch?v=S5W8c3iKN9c
