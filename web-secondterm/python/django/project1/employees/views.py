@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.template import loader
 from .models import Employee
@@ -16,7 +16,7 @@ def EmployeePage(req):
     return render(req, page, context)
 
 def EmployeeDetailsPage(req, id):
-    employee = Employee.objects.get(id=id)
+    employee = get_object_or_404(Employee, id=id)
 
     page = "employeeDetails.html"
 
@@ -25,3 +25,10 @@ def EmployeeDetailsPage(req, id):
     }
 
     return render(req, page, context)
+
+def DeleteEmployee(req, id):
+    employee = get_object_or_404(Employee, id=id)
+
+    employee.delete()
+
+    return redirect("employees")

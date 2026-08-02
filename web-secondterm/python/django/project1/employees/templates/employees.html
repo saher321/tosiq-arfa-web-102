@@ -22,8 +22,11 @@
                             <td>{{ emp.full_name }}</td>
                             <td>{{ emp.email }}</td>
                             <td>
-                                <a href="details/{{emp.id}}">
+                                <a href={% url 'employee-details' emp.id %}>
                                     View
+                                </a> &nbsp; | &nbsp; 
+                                <a href={% url 'delete-employee' emp.id %}>
+                                    Delete
                                 </a>
                             </td>
                         </tr>
