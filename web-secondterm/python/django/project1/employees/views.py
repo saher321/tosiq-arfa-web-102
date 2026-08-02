@@ -6,12 +6,22 @@ from .models import Employee
 
 def EmployeePage(req):
     employees = Employee.objects.values()
-    # page = "employees.html"
-    # return render(page, req)
-    employee_page = loader.get_template("employees.html")
+    page = "employees.html"
+    # employee_page = loader.get_template("employees.html")
 
     context = {
         'employees' : employees
     }
 
-    return HttpResponse(employee_page.render(context))
+    return render(req, page, context)
+
+def EmployeeDetailsPage(req, id):
+    employee = Employee.objects.get(id=id)
+
+    page = "employeeDetails.html"
+
+    context = {
+        'employee' : employee
+    }
+
+    return render(req, page, context)
