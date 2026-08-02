@@ -19,5 +19,5 @@
 1 August, 2026 (django-admin, templates)
 	- https://www.youtube.com/watch?v=S5W8c3iKN9c
 
-2 August, 2026 (django templates)
+2 August, 2026 (django templates, view all, view single and delete records)
 	- https://www.youtube.com/watch?v=cRx1t1kkSrU
