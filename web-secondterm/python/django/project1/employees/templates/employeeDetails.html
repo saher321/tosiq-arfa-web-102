@@ -1,25 +1,25 @@
 <html>
-    <head> 
-        <title>Employees in Django</title>
-    </head>
-    <body>
-        <h1>Employee [ #{{ employee.emp_id }} ]</h1>
+  <head>
+    <title>Employees in Django</title>
+  </head>
+  <body>
+    <a href="{% url 'employees' %}">Back to Employees </a>
 
-        <a href="{% url 'employees' %}">Back to Employees </a>
+    <h1>Employee [ #{{ employee.emp_id }} ]</h1>
 
-        <table border="1" cellspacing="0" cellpadding="10">
-            <tr>
-                <th>Name</th>
-                <td>{{ employee.full_name }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ employee.email }}</td>
-            </tr>
-            <tr>
-                <th>Contact</th>
-                <td>{{ employee.contact }}</td>
-            </tr>
-        </table>
-    </body>
+    <table border="1" cellspacing="0" cellpadding="10">
+      <tr>
+        <th>Name</th>
+        <td>{{ employee.full_name }}</td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td>{{ employee.email }}</td>
+      </tr>
+      <tr>
+        <th>Contact</th>
+        <td>{{ employee.contact }}</td>
+      </tr>
+    </table>
+  </body>
 </html>

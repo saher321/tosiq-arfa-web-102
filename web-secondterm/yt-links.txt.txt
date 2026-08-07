@@ -21,3 +21,6 @@
 
 2 August, 2026 (django templates, view all, view single and delete records)
 	- https://www.youtube.com/watch?v=cRx1t1kkSrU
+
+7 August, 2026 (prev, add record)
+	- https://www.youtube.com/watch?v=6sgfUu5jPD8
