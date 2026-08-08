@@ -6,7 +6,7 @@ All Employees
 
 {% block content %}
 
-<h1>Employees</h1>
+{% include 'components/page-title.html' with title="Employees" %}
         
 <a href="{% url 'add-employee' %}">Add new employee</a>
 <hr />
