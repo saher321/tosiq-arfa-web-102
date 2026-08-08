@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>{% block title %} MASTER {% endblock %}</title>
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> {% endcomment %}
+
+    <style>
+      .messages {
+        background-color: #c7f9a4;
+        padding: 4px;
+        border-radius: 4px;
+        color: #517f38;
+        margin: 12px 0px;
+        width: fit-content;
+      }
+    </style>
+    
+  </head>
+  <body>
+    Master template
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>
