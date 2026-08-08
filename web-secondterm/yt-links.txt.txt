@@ -24,3 +24,6 @@
 
 7 August, 2026 (prev, add record)
 	- https://www.youtube.com/watch?v=6sgfUu5jPD8
+
+8 August, 2026 (edit record and django mastering template)
+	- https://www.youtube.com/watch?v=5byQ__TiZrQ

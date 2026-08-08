@@ -1,6 +1,5 @@
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
-from django.template import loader
 from .models import Employee
 # Create your views here.
 
@@ -32,6 +31,29 @@ def AddEmployeePage(req):
         )
         return redirect("employees")
     return render(req, page)
+
+def EditEmployeePage(req, id):
+    page = "editEmployee.html"
+
+    employee = get_object_or_404(Employee, id=id)
+
+    if req.method == "POST":
+        employee.emp_id = req.POST['empid']
+        employee.full_name = req.POST['fname']
+        employee.email = req.POST['email']
+        employee.contact = req.POST['contact']
+
+        employee.save()
+
+    context = {
+        'emp' : employee
+    }
+
+    messages.success(req, "Data has been updated!")
+
+    return render(req, page, context)
+
+
 
 # http://localhost:8000/employees/details/1
 def EmployeeDetailsPage(req, id):
