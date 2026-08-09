@@ -1,0 +1,19 @@
+add all installed modules/packages to the requirements.txt file
+    -> cmd: pip freeze > requirements.txt
+
+install all the pkgs / module from requirements.txt
+    -> cmd: pip install -r requirements.txt
+
+
+PMS (Project management system)
+
+Frontend (react)
+    -> files and folder for project
+Backend (python > django-drf)
+    -> APIS
+        -> Authentication
+        -> Empoyee
+        -> Customers
+        -> Projects
+        -> Tasks
+
