@@ -17,3 +17,16 @@ Backend (python > django-drf)
         -> Projects
         -> Tasks
 
+_____________________________________
+python -m venv env
+pip install django djangorestframework
+
+------------
+pip uninstall django
+pip install django==5.1
+
+________________
+save pkgs into newly created file "req.txt"
+pip freeze > requirements.txt
+install existing pkg
+pip install -r  requirements.txt
