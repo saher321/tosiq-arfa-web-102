@@ -29,3 +29,7 @@
 	- https://www.youtube.com/watch?v=5byQ__TiZrQ
 
 9 August, 2026 (django rest framework intro, demo api)
+
+
+16 August, 2026 (pkg installed, connection to mysql and more)
+	- https://www.youtube.com/watch?v=eypPuUNqqYY
