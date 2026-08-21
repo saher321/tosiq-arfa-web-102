@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.reg-form label {
+  display: block;
+}

@@ -33,3 +33,6 @@
 
 16 August, 2026 (pkg installed, connection to mysql and more)
 	- https://www.youtube.com/watch?v=eypPuUNqqYY
+
+21 August, 2026 (intro to xampp, installed react and create signup ui screen)
+	- https://www.youtube.com/watch?v=FkghemhUVrk
