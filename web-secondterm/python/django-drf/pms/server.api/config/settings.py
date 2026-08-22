@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #other_libraries
     'rest_framework',
     # Apps
+    'user',
     'customers'
 ]
 
@@ -80,7 +81,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pms_102',
+        'NAME': 'dj_pms_b102',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
