@@ -36,3 +36,6 @@
 
 21 August, 2026 (intro to xampp, installed react and create signup ui screen)
 	- https://www.youtube.com/watch?v=FkghemhUVrk
+
+22 August, 2026 (register function in python, useForm in react)
+	- https://www.youtube.com/watch?v=HnA0IFeLVDw
