@@ -3,12 +3,25 @@ import AuthLayout from "../../layouts/AuthLayout";
 import { Link } from 'react-router'
 import { InputField, SimpleButton } from "../../components/ComponentsLib";
 import { useForm } from 'react-hook-form'
+import { REG_USER_API } from "../../utils/apis";
+import axios from 'axios'
+import toast from "react-hot-toast";
 
 const Register = () => {
   const { register, handleSubmit } = useForm()
   
-  const registerUser = (data) => {
-    console.log(data)
+  const registerUser = async (data) => {
+    try {
+      const response = await axios.post(REG_USER_API, data)
+      if (response.data.status == true) {
+        toast.success(response.data.message)
+      } else {
+        toast.error(response.data.message)
+      }
+    } catch (error) {
+      toast.error("Internal server error")
+      throw new Error(error)
+    }
   }
 
   return (
@@ -23,12 +36,12 @@ const Register = () => {
           <div className="grid grid-cols-12 gap-3">
             <div className="col-span-6">
               <label>First name</label>
-              <InputField {...register('f_name')}
+              <InputField {...register('first_name')}
                type="text" hint="e.g John doe" />
             </div>
             <div className="col-span-6">
               <label>Last name</label>
-              <InputField {...register('l_name')}
+              <InputField {...register('last_name')}
                type="text" hint="e.g John doe" />
             </div>
             <div className="col-span-12">
