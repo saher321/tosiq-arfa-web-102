@@ -15,7 +15,7 @@ const Login = () => {
       const response = await axios.post(LGN_USER_API, data)
       if (response.data.status == true) {
         toast.success(response.data.message)
-        console.log(response.data.user)
+        console.log(response.data)
       } else {
         toast.error(response.data.message)
       }

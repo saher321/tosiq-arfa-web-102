@@ -59,16 +59,21 @@ def login(request):
             "status": False,
             "message": "Please fill the remaining fields"
         })
-    
-    if not User.objects.filter(email=email).exists():
+        
+    try:
+        user = User.objects.get(email=email)
+    except User.DoesNotExist:
         return Response({
             "status": False,
             "message": "User not found"
         })
     
-    user = authenticate(email=email, password=password) 
+    auth_user = authenticate(
+        username=user.username, 
+        password=password
+    ) 
     
-    if user is None:
+    if auth_user is None:
         return Response({
             "status": False,
             "message": "Credentials didn't matched"
@@ -78,6 +83,5 @@ def login(request):
     return Response({
         "status": True,
         "message": "User loggedin sucessfully",
-        "user": user
     })    
     
