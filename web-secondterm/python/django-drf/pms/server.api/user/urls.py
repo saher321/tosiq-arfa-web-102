@@ -5,4 +5,5 @@ from . import views
 # http://localhost:8000/test/server
 urlpatterns = [
     path('register/', views.register, name="register"),
+    path('login/', views.login, name="login"),
 ]

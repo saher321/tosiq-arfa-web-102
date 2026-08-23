@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import AuthLayout from "../../layouts/AuthLayout";
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { InputField, SimpleButton } from "../../components/ComponentsLib";
 import { useForm } from 'react-hook-form'
 import { REG_USER_API } from "../../utils/apis";
@@ -9,12 +9,14 @@ import toast from "react-hot-toast";
 
 const Register = () => {
   const { register, handleSubmit } = useForm()
+  const navigate = useNavigate()
   
   const registerUser = async (data) => {
     try {
       const response = await axios.post(REG_USER_API, data)
       if (response.data.status == true) {
         toast.success(response.data.message)
+        navigate('/auth/login', {replace: true})
       } else {
         toast.error(response.data.message)
       }
@@ -66,8 +68,9 @@ const Register = () => {
             </div>
           </div>
         </form>
+        <hr />
             <div>
-                <span>Already have an account? <Link className="text-blue-600 hover:underline" to="#">Login</Link> </span>
+                <span>Already have an account? <Link className="text-blue-600 hover:underline" to="/auth/login">Login</Link> </span>
             </div>
       </div>
     </AuthLayout>

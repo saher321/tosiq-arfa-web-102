@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 # Create your views here.
@@ -48,3 +49,35 @@ def register(request):
             'message': "Failed to create an account!"
         })
 
+@api_view(['POST'])
+def login(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+    
+    if not email or not password:
+        return Response({
+            "status": False,
+            "message": "Please fill the remaining fields"
+        })
+    
+    if not User.objects.filter(email=email).exists():
+        return Response({
+            "status": False,
+            "message": "User not found"
+        })
+    
+    user = authenticate(email=email, password=password) 
+    
+    if user is None:
+        return Response({
+            "status": False,
+            "message": "Credentials didn't matched"
+        })    
+        
+    
+    return Response({
+        "status": True,
+        "message": "User loggedin sucessfully",
+        "user": user
+    })    
+    
