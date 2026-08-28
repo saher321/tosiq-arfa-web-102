@@ -42,3 +42,6 @@
 
 23 August, 2026 (login api)
 	- https://www.youtube.com/watch?v=v9qKkWSgiKg
+
+24 August, 2026 (protected route, ui, prev)
+	- https://www.youtube.com/watch?v=EWr4Qcz4sLI

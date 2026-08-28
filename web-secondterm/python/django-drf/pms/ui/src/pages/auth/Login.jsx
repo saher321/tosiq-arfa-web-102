@@ -1,14 +1,18 @@
 import React, { useEffect } from "react";
 import AuthLayout from "../../layouts/AuthLayout";
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { InputField, SimpleButton } from "../../components/ComponentsLib";
 import { useForm } from 'react-hook-form'
 import { LGN_USER_API } from "../../utils/apis";
 import axios from 'axios'
 import toast from "react-hot-toast";
+import useAuth from "../../store/useAuth.js";
 
 const Login = () => {
+  const login = useAuth((state) => state.login)
+
   const { register, handleSubmit } = useForm()
+  const navigate = useNavigate()
   
   const loginUser = async (data) => {
     try {
@@ -16,6 +20,8 @@ const Login = () => {
       if (response.data.status == true) {
         toast.success(response.data.message)
         console.log(response.data)
+        login(response.data.user, response.data.token)
+        navigate('/dashboard', {replace: true})
       } else {
         toast.error(response.data.message)
       }

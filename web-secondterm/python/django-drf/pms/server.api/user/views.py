@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
 # Create your views here.
 
 @api_view(['POST'])
@@ -77,11 +78,20 @@ def login(request):
         return Response({
             "status": False,
             "message": "Credentials didn't matched"
-        })    
+        })  
+
+    token = RefreshToken.for_user(auth_user)  
         
     
     return Response({
         "status": True,
         "message": "User loggedin sucessfully",
+        "user": {
+            "username": auth_user.username,
+            "email": auth_user.email,
+            "first_name": auth_user.first_name,
+            "last_name": auth_user.last_name
+        },
+        "token": str(token.access_token)
     })    
     
