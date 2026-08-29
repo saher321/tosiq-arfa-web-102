@@ -1,9 +1,13 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from .models import UserPasswordOtp
 from django.contrib.auth import authenticate
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+import random
+from django.utils import timezone
+from datetime import timedelta
 # Create your views here.
 
 @api_view(['POST'])
@@ -111,6 +115,31 @@ def forgot_password(request):
             "status": False,
             "message": "User not found"
         })
+        
+    # Delete old otps
+    UserPasswordOtp.objects.filter(user=user).delete()
+    # 6 digits otp
+    otp = random.randint(100000, 999999)
+    
+    otp_expires_at = timezone.now() + timedelta(minutes=10)
+    
+    saved_otp = UserPasswordOtp.objects.create(
+        user = user,
+        otp = otp,
+        expires_at = otp_expires_at,
+    )
+    if saved_otp:
+        return Response({
+            'status': True,
+            'message': "Account has been created"
+        })
+    else:
+        return Response({
+            'status': False,
+            'message': "Failed to create an account!"
+        })
+    
+    
     
 @api_view(['POST'])
 def reset_password(request):
