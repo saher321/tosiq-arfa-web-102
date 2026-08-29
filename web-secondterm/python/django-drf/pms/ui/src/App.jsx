@@ -5,6 +5,8 @@ import Login from './pages/auth/Login'
 import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './utils/ProtectedRoute'
 import AuthRoute from './utils/AuthRoute'
+import ForogotPassword from './pages/auth/ForgotPassword'
+import ResetPassword from './pages/auth/ResetPassword'
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
         <Route element={<AuthRoute />}>
           <Route path="/auth/register" element={<Register />} />
           <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/forgot-password" element={<ForogotPassword />} />
+          <Route path="/auth/reset-password" element={<ResetPassword />} />
         </Route>
         
         <Route element={<ProtectedRoute />}>

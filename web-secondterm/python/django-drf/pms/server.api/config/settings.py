@@ -182,6 +182,15 @@ SIMPLE_JWT = {
 }
 
 
+# GMAIL SETUP
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"  # Or your specific SMTP provider host
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USER = "untoldgamingplays@gmail.com"
+EMAIL_PASSWORD = "tjbgksfcjdcqoslc"
+DEFAULT_FROM_EMAIL = EMAIL_USER
+
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
 

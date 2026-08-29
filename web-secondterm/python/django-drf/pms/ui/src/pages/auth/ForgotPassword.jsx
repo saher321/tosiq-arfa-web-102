@@ -3,25 +3,25 @@ import AuthLayout from "../../layouts/AuthLayout";
 import { Link, useNavigate } from 'react-router'
 import { InputField, SimpleButton } from "../../components/ComponentsLib";
 import { useForm } from 'react-hook-form'
-import { LGN_USER_API } from "../../utils/apis";
+import { FP_USER_API } from "../../utils/apis";
 import axios from 'axios'
 import toast from "react-hot-toast";
 import useAuth from "../../store/useAuth.js";
 
-const Login = () => {
-  const login = useAuth((state) => state.login)
+const ForogotPassword = () => {
+  const forgotEmail = useAuth((state) => state.forgotEmail)
 
   const { register, handleSubmit } = useForm()
   const navigate = useNavigate()
   
-  const loginUser = async (data) => {
+  const forogtPassword = async (data) => {
     try {
-      const response = await axios.post(LGN_USER_API, data)
+      const response = await axios.post(FP_USER_API, data)
       if (response.data.status == true) {
         toast.success(response.data.message)
         console.log(response.data)
-        login(response.data.user, response.data.token)
-        navigate('/dashboard', {replace: true})
+        forgotEmail(data.email)
+        navigate('/auth/reset-password', {replace: true})
       } else {
         toast.error(response.data.message)
       }
@@ -35,27 +35,22 @@ const Login = () => {
     <AuthLayout>
       <div className="my-5 mx-auto max-w-2xl">
         <div className="text-center">
-          <h2 className="font-bold text-xl">Login</h2>
-          <p className="text-[12px] text-gray-700 italic">Enter your credentials to access dashboard</p>
+          <h2 className="font-bold text-xl">Forgot password</h2>
+          <p className="text-[12px] text-gray-700 italic">Lost your password, dont worry</p>
         </div>
 
-        <form onSubmit={handleSubmit(loginUser)} className="my-4 reg-form">
+        <form onSubmit={handleSubmit(forogtPassword)} className="my-4 reg-form">
           <div className="grid grid-cols-12 gap-3">
             <div className="col-span-12">
               <label>Email</label>
               <InputField {...register('email')}
                type="email" hint="e.g johndoe@email.com" />
             </div>
-            <div className="col-span-12">
-              <label>Password</label>
-              <InputField {...register('password')}
-               type="password" hint="*********" />
-            </div>
             <div className="flex justify-between items-center col-span-12">
               <SimpleButton 
-                text="Login"
+                text="Send OTP"
               />
-              <Link to={"/auth/forgot-password"} className="text-blue-600 text-[14px] italic">Forgot password</Link>
+              
             </div>
           </div>
         </form>
@@ -68,4 +63,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForogotPassword;

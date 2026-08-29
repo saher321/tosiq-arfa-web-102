@@ -43,5 +43,8 @@
 23 August, 2026 (login api)
 	- https://www.youtube.com/watch?v=v9qKkWSgiKg
 
-24 August, 2026 (login token, zustand auth management)
+28 August, 2026 (login token, zustand auth management)
 	- https://www.youtube.com/watch?v=EWr4Qcz4sLI
+
+29 August, 2026 (forgot password, ui)
+	- https://www.youtube.com/watch?v=smrehjRqJGc

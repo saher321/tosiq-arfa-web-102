@@ -94,4 +94,24 @@ def login(request):
         },
         "token": str(token.access_token)
     })    
+
+@api_view(['POST'])
+def forgot_password(request):
+    userEmail = request.data.get("email")
+    if not userEmail:
+        return Response({
+            "status": False,
+            "message": "Email is not provided yet",
+        })
     
+    try:
+        user = User.objects.get(email=userEmail)
+    except User.DoesNotExist:
+        return Response({
+            "status": False,
+            "message": "User not found"
+        })
+    
+@api_view(['POST'])
+def reset_password(request):
+    pass

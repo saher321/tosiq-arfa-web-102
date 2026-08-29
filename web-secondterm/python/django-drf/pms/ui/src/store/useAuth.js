@@ -6,6 +6,7 @@ const useAuth = create(
     (set) => ({
       user: null,
       token: null,
+      userForgotEmail: '',
       isAuthenticated: false,
 
       login: (user, token) => {
@@ -22,7 +23,12 @@ const useAuth = create(
             token: null,
             isAuthenticated: false,
         })
-      } 
+      }, 
+      forgotEmail: (forgotUserEmail) => {
+        set({
+          userForgotEmail: forgotUserEmail
+        })
+      }
     }),
     {
       name: "uDetails",

@@ -8,20 +8,19 @@ import axios from 'axios'
 import toast from "react-hot-toast";
 import useAuth from "../../store/useAuth.js";
 
-const Login = () => {
+const ResetPassword = () => {
   const login = useAuth((state) => state.login)
 
   const { register, handleSubmit } = useForm()
   const navigate = useNavigate()
   
-  const loginUser = async (data) => {
+  const resetPassword = async (data) => {
     try {
       const response = await axios.post(LGN_USER_API, data)
       if (response.data.status == true) {
         toast.success(response.data.message)
-        console.log(response.data)
         login(response.data.user, response.data.token)
-        navigate('/dashboard', {replace: true})
+        navigate('/auth/login', {replace: true})
       } else {
         toast.error(response.data.message)
       }
@@ -35,27 +34,26 @@ const Login = () => {
     <AuthLayout>
       <div className="my-5 mx-auto max-w-2xl">
         <div className="text-center">
-          <h2 className="font-bold text-xl">Login</h2>
+          <h2 className="font-bold text-xl">Reset password</h2>
           <p className="text-[12px] text-gray-700 italic">Enter your credentials to access dashboard</p>
         </div>
 
-        <form onSubmit={handleSubmit(loginUser)} className="my-4 reg-form">
+        <form onSubmit={handleSubmit(resetPassword)} className="my-4 reg-form">
           <div className="grid grid-cols-12 gap-3">
             <div className="col-span-12">
-              <label>Email</label>
-              <InputField {...register('email')}
-               type="email" hint="e.g johndoe@email.com" />
+              <label>OTP</label>
+              <InputField {...register('otp')}
+               type="text" hint="123456" />
             </div>
             <div className="col-span-12">
-              <label>Password</label>
+              <label>New password</label>
               <InputField {...register('password')}
                type="password" hint="*********" />
             </div>
             <div className="flex justify-between items-center col-span-12">
               <SimpleButton 
-                text="Login"
+                text="Reset password"
               />
-              <Link to={"/auth/forgot-password"} className="text-blue-600 text-[14px] italic">Forgot password</Link>
             </div>
           </div>
         </form>
@@ -68,4 +66,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ResetPassword;
