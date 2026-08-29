@@ -128,10 +128,16 @@ def forgot_password(request):
         otp = otp,
         expires_at = otp_expires_at,
     )
-    if saved_otp:
+    if saved_otp.is_expired():
         return Response({
             'status': True,
-            'message': "Account has been created"
+            'message': "otp has been expired"
+        })
+        
+    elif saved_otp:
+        return Response({
+            'status': True,
+            'message': "Otp has been sent to your email"
         })
     else:
         return Response({
