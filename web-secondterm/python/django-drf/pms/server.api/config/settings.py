@@ -187,9 +187,9 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"  # Or your specific SMTP provider host
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_USER = "untoldgamingplays@gmail.com"
-EMAIL_PASSWORD = "tjbgksfcjdcqoslc"
-DEFAULT_FROM_EMAIL = EMAIL_USER
+EMAIL_HOST_USER = "untoldgamingplays@gmail.com"
+EMAIL_HOST_PASSWORD = "wlkyzeuujtiznlsy"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
@@ -213,8 +213,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
 MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
+    "default": {
+        "BACKEND": "django.core.mail.backends.smtp.EmailBackend",
+        "OPTIONS": {
+            "host": "localhost",
+        },
     },
 }
 

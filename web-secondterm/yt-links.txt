@@ -48,3 +48,6 @@
 
 29 August, 2026 (forgot password, ui)
 	- https://www.youtube.com/watch?v=smrehjRqJGc
+
+30 August, 2026 (reset, email)
+	- https://www.youtube.com/watch?v=5Ztl6ZTecPk

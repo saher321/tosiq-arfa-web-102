@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from .models import UserPasswordOtp
 from django.contrib.auth import authenticate
 from rest_framework.decorators import api_view
@@ -8,6 +9,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 import random
 from django.utils import timezone
 from datetime import timedelta
+from django.conf import settings
 # Create your views here.
 
 @api_view(['POST'])
@@ -128,13 +130,26 @@ def forgot_password(request):
         otp = otp,
         expires_at = otp_expires_at,
     )
-    if saved_otp.is_expired():
-        return Response({
-            'status': True,
-            'message': "otp has been expired"
-        })
-        
-    elif saved_otp:
+    # if saved_otp.is_expired():
+    #     return Response({
+    #         'status': True,
+    #         'message': "otp has been expired"
+    #     })
+    send_mail(
+        subject="PMS Resetting password [OTP]",
+        message=(
+            f"Hi {user.username},\n\n"
+            f"Your password reset OTP is: {otp}\n\n"
+            "Please do not share this OTP with anyone.\n"
+            "This OTP will expire after 10 minutes.\n\n"
+            "If you did not request a password reset, please ignore this email."
+        ),
+        from_email= settings.DEFAULT_FROM_EMAIL,
+        recipient_list=[user.email],
+        fail_silently=False,
+    )
+
+    if saved_otp:
         return Response({
             'status': True,
             'message': "Otp has been sent to your email"

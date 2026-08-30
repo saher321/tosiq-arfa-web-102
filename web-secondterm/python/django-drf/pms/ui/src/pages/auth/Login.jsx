@@ -21,7 +21,7 @@ const Login = () => {
         toast.success(response.data.message)
         console.log(response.data)
         login(response.data.user, response.data.token)
-        navigate('/dashboard', {replace: true})
+        navigate('/', {replace: true})
       } else {
         toast.error(response.data.message)
       }
