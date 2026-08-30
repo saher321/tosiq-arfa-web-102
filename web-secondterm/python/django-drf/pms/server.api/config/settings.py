@@ -216,7 +216,10 @@ MAILERS = {
     "default": {
         "BACKEND": "django.core.mail.backends.smtp.EmailBackend",
         "OPTIONS": {
-            "host": "localhost",
+            "host": "smtp.gmail.com",
+            "use_tls": True,
+            "username": DEFAULT_FROM_EMAIL,
+            "password": EMAIL_HOST_PASSWORD,
         },
     },
 }

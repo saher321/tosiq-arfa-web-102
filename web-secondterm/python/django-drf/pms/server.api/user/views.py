@@ -146,7 +146,7 @@ def forgot_password(request):
         ),
         from_email= settings.DEFAULT_FROM_EMAIL,
         recipient_list=[user.email],
-        fail_silently=False,
+        fail_silently=False
     )
 
     if saved_otp:

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import AuthLayout from "../../layouts/AuthLayout";
 import { Link, useNavigate } from 'react-router'
 import { InputField, SimpleButton } from "../../components/ComponentsLib";
@@ -10,22 +10,27 @@ import useAuth from "../../store/useAuth.js";
 
 const ForogotPassword = () => {
   const forgotEmail = useAuth((state) => state.forgotEmail)
+  const [loading, setLoading] = useState(false)
 
   const { register, handleSubmit } = useForm()
   const navigate = useNavigate()
   
   const forogtPassword = async (data) => {
     try {
+      setLoading(true)
       const response = await axios.post(FP_USER_API, data)
       if (response.data.status == true) {
         toast.success(response.data.message)
         console.log(response.data)
         forgotEmail(data.email)
         navigate('/auth/reset-password', {replace: true})
+        setLoading(false)
       } else {
+        setLoading(false)
         toast.error(response.data.message)
       }
     } catch (error) {
+      setLoading(false)
       toast.error("Internal server error")
       throw new Error(error)
     }
@@ -48,7 +53,8 @@ const ForogotPassword = () => {
             </div>
             <div className="flex justify-between items-center col-span-12">
               <SimpleButton 
-                text="Send OTP"
+                disabled={loading}
+                text={loading ? 'OTP is sending...' : 'Send OTP'}
               />
               
             </div>
