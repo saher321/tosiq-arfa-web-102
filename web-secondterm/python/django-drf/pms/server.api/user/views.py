@@ -164,4 +164,45 @@ def forgot_password(request):
     
 @api_view(['POST'])
 def reset_password(request):
-    pass
+    userEmail = request.data.get("userForgotEmail")
+    otp = request.data.get("otp")
+    new_password = request.data.get("newPassword")
+    
+    if not userEmail or not otp or not new_password:
+        return Response({
+            "status": False,
+            "message": "Please fill the remaining fields"
+        })
+    
+    try:
+        user = User.objects.get(email=userEmail)
+    except User.DoesNotExist:
+        return Response({
+            "status": False,
+            "message": "User not found"
+        })
+    
+    try:
+        user_otp = UserPasswordOtp.objects.get(user=user, otp=otp)
+    except UserPasswordOtp.DoesNotExist:
+        return Response({
+            "status": False,
+            "message": "Invalid OTP"
+        })
+    
+    # if user_otp.is_expired():
+    #     return Response({
+    #         'status': False,
+    #         'message': "OTP has been expired"
+    #     })
+    
+    user.set_password(new_password)
+    user.save()
+    
+    # Delete the used OTP
+    user_otp.delete()
+    
+    return Response({
+        'status': True,
+        'message': "Password has been reset successfully"
+    })

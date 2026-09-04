@@ -3,23 +3,26 @@ import AuthLayout from "../../layouts/AuthLayout";
 import { Link, useNavigate } from 'react-router'
 import { InputField, SimpleButton } from "../../components/ComponentsLib";
 import { useForm } from 'react-hook-form'
-import { LGN_USER_API } from "../../utils/apis";
+import { LGN_USER_API, RP_USER_API } from "../../utils/apis";
 import axios from 'axios'
 import toast from "react-hot-toast";
 import useAuth from "../../store/useAuth.js";
 
 const ResetPassword = () => {
-  const login = useAuth((state) => state.login)
-
+  const userForgotEmail = useAuth((state) => state.userForgotEmail)
   const { register, handleSubmit } = useForm()
   const navigate = useNavigate()
   
   const resetPassword = async (data) => {
     try {
-      const response = await axios.post(LGN_USER_API, data)
+      const newData = {
+        userForgotEmail,
+        otp: data.otp,
+        newPassword: data.newPassword
+      }
+      const response = await axios.post(RP_USER_API, newData)
       if (response.data.status == true) {
         toast.success(response.data.message)
-        login(response.data.user, response.data.token)
         navigate('/auth/login', {replace: true})
       } else {
         toast.error(response.data.message)
@@ -35,7 +38,7 @@ const ResetPassword = () => {
       <div className="my-5 mx-auto max-w-2xl">
         <div className="text-center">
           <h2 className="font-bold text-xl">Reset password</h2>
-          <p className="text-[12px] text-gray-700 italic">Enter your credentials to access dashboard</p>
+          <p className="text-[12px] text-gray-700 italic">Enter otp, new password for reset password</p>
         </div>
 
         <form onSubmit={handleSubmit(resetPassword)} className="my-4 reg-form">
@@ -47,7 +50,7 @@ const ResetPassword = () => {
             </div>
             <div className="col-span-12">
               <label>New password</label>
-              <InputField {...register('password')}
+              <InputField {...register('newPassword')}
                type="password" hint="*********" />
             </div>
             <div className="flex justify-between items-center col-span-12">
