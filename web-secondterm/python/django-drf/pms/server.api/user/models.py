@@ -16,3 +16,19 @@ class UserPasswordOtp(models.Model):
 
     def __str__(self):
         return self.user.email
+    
+class UserRole(models.Model):
+    class Role(models.TextChoices):
+        PM = "pm", "Project Manager"
+        EMP = "emp", "Employee"
+
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="role",
+    )
+    role = models.CharField(
+        max_length=3,
+        choices=Role.choices,
+        default=Role.EMP,
+    )
