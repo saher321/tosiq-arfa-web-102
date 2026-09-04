@@ -188,7 +188,7 @@ EMAIL_HOST = "smtp.gmail.com"  # Or your specific SMTP provider host
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "untoldgamingplays@gmail.com"
-EMAIL_HOST_PASSWORD = "wlkyzeuujtiznlsy"
+EMAIL_HOST_PASSWORD = "qsexiqouzdvsockp"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 TIME_ZONE = 'UTC'
