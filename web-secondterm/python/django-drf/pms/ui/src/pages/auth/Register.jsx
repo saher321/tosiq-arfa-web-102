@@ -1,20 +1,17 @@
 import React, { useEffect } from "react";
 import AuthLayout from "../../layouts/AuthLayout";
 import { Link, useNavigate } from 'react-router'
-import { InputField, SimpleButton } from "../../components/ComponentsLib";
+import { InputField, SelectInput, SimpleButton } from "../../components/ComponentsLib";
 import { useForm } from 'react-hook-form'
 import { REG_USER_API } from "../../utils/apis";
 import axios from 'axios'
 import toast from "react-hot-toast";
+import { roles } from '../../utils/common.js'
 
 const Register = () => {
   const { register, handleSubmit } = useForm()
   const navigate = useNavigate()
 
-  const roles = [
-    {id: "pm", role: "Project Manager"},
-    {id: "emp", role: "Employee"}
-  ]
   
   const registerUser = async (data) => {
     try {
@@ -74,19 +71,11 @@ const Register = () => {
             
             <div className="col-span-12">
               <label>Select role</label>
-              <select
+              <SelectInput 
               { ...register("role") }
-              className="w-full bg-gray-200 border border-gray-300 rounded p-3 focus:outline focus:outline-blue-600"
-              >
-                <option disabled> Choose on option </option>
-                {
-                  roles.map((role) => {
-                    return (
-                      <option value={role.id}>{role.role}</option>
-                    )
-                  })
-                }
-              </select>
+              data={roles}
+              />
+              
             </div>
 
             <div className="col-span-12">

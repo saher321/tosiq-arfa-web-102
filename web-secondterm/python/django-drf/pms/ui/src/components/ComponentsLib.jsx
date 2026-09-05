@@ -24,9 +24,27 @@ export const SimpleButton = (props) => {
 };
 
 export const SelectInput = (props) => {
-  const { className, ...otherProps } = props;
+  const { data = [], className, ...otherProps } = props;
 
   return (
-    <select></select>
+    <select
+      {...otherProps}
+      className="w-full bg-gray-200 border border-gray-300 rounded p-3 focus:outline focus:outline-blue-600"
+      >
+        { data.length == 0 ?
+          <option defaultValue="" disabled> No options provided yet </option> :
+
+          <>
+            <option disabled> Choose on option </option>
+            {
+              data.map((context, i) => {
+                return (
+                  <option key={i} value={context.id}>{context.text}</option>
+                )
+              })
+            }
+          </>
+        }
+      </select>
   )
 }

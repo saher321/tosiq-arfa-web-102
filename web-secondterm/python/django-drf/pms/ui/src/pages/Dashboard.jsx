@@ -2,6 +2,7 @@ import React from 'react'
 import useAuth from '../store/useAuth.js'
 import { useNavigate } from 'react-router'
 import toast from 'react-hot-toast'
+import RoleBasedLayout from '../layouts/RoleBasedLayout.jsx'
 
 const Dashboard = () => {
 
@@ -16,7 +17,7 @@ const Dashboard = () => {
     }
 
     return (
-        <div>
+        <RoleBasedLayout>
             <div>
                 {user?.role == 'pm' ? 
                 <>
@@ -34,7 +35,7 @@ const Dashboard = () => {
                 </button>
             </div>
 
-        </div>
+        </RoleBasedLayout>
     )
 }
 
