@@ -22,3 +22,11 @@ export const SimpleButton = (props) => {
     </button>
   );
 };
+
+export const SelectInput = (props) => {
+  const { className, ...otherProps } = props;
+
+  return (
+    <select></select>
+  )
+}

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
-from .models import UserPasswordOtp
+from .models import UserPasswordOtp, UserRole
 from django.contrib.auth import authenticate
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -19,6 +19,7 @@ def register(request):
     username = request.data.get('username')
     email = request.data.get('email')
     password = request.data.get('password')
+    role = request.data.get('role')
 
     if not first_name or not last_name or not username or not email or not password:
         return Response({
@@ -46,6 +47,7 @@ def register(request):
         password = password,
     )
     if new_user:
+        UserRole.objects.create( role=role, user=new_user )
         return Response({
             'status': True,
             'message': "Account has been created"
@@ -88,7 +90,7 @@ def login(request):
 
     token = RefreshToken.for_user(auth_user)  
         
-    
+    role = UserRole.objects.get(user_id=user)
     return Response({
         "status": True,
         "message": "User loggedin sucessfully",
@@ -96,7 +98,8 @@ def login(request):
             "username": auth_user.username,
             "email": auth_user.email,
             "first_name": auth_user.first_name,
-            "last_name": auth_user.last_name
+            "last_name": auth_user.last_name,
+            "role": role.role
         },
         "token": str(token.access_token)
     })    
@@ -158,9 +161,7 @@ def forgot_password(request):
         return Response({
             'status': False,
             'message': "Failed to create an account!"
-        })
-    
-    
+        })  
     
 @api_view(['POST'])
 def reset_password(request):
