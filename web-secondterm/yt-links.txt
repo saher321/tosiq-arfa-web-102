@@ -51,3 +51,6 @@
 
 30 August, 2026 (reset, email)
 	- https://www.youtube.com/watch?v=5Ztl6ZTecPk
+
+5 Sep, 2026 (role insert based on user, dashboard ui)
+	- https://www.youtube.com/watch?v=KCf0cSs3ok4
