@@ -1,13 +1,19 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from .models import Customers
 # Create your views here.
 
-@api_view(['GET'])
-def test_server(request):
-    return Response({
-        'status': True,
-        'message': 'Testing api'
-    })
+@api_view(["GET"])
+def customers(request):
+    try:
+        all_customers = Customers.objects.get()
+        return Response({
+            "status": True,
+            "customers": all_customers
+        })
+    except Customers.DoesNotExist():
+        return Response({
+            "status": False,
+            "message": "Failed to fetch customers"
+        })
