@@ -30,7 +30,7 @@ const Register = () => {
 
   return (
     <AuthLayout>
-      <div className="my-5 grid place-items-center">
+      <div className="my-5 mx-auto max-w-2xl">
         <div className="text-center">
           <h2 className="font-bold text-xl">Register</h2>
           <p className="text-[12px] text-gray-700 italic">Create your account to access dashboard</p>
@@ -86,9 +86,9 @@ const Register = () => {
           </div>
         </form>
         <hr />
-            <div>
-                <span>Already have an account? <Link className="text-blue-600 hover:underline" to="/auth/login">Login</Link> </span>
-            </div>
+        <div>
+          <span>Already have an account? <Link className="text-blue-600 hover:underline" to="/auth/login">Login</Link> </span>
+        </div>
       </div>
     </AuthLayout>
   );

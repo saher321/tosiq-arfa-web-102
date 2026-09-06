@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+::selection {
+  background-color: #155DFC;
+  color: white;
+}
+
 .reg-form label {
   display: block;
 }

@@ -54,3 +54,6 @@
 
 5 Sep, 2026 (role insert based on user, dashboard ui)
 	- https://www.youtube.com/watch?v=KCf0cSs3ok4
+
+6 Sep, 2026 (dashboard ui fix, customer list ui-api implemented)
+	- https://www.youtube.com/watch?v=SJHvOwojZqM
