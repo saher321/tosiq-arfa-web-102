@@ -4,3 +4,5 @@ export const REG_USER_API = BASE_URL + "/auth/register/"
 export const LGN_USER_API = BASE_URL + "/auth/login/"
 export const FP_USER_API = BASE_URL + "/auth/forgot-password/"
 export const RP_USER_API = BASE_URL + "/auth/reset-password/"
+
+export const CUSTOMERS_API = BASE_URL + "/customers"

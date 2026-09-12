@@ -4,5 +4,5 @@ from . import views
 
 # http://localhost:8000/test/server
 urlpatterns = [
-    path('/', views.customers, name="customers")
+    path('', views.customers, name="customers")
 ]
