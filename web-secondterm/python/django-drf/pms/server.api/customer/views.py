@@ -9,8 +9,8 @@ from .serializers import CustomerSerializer
 @api_view(["GET"])
 def customers(request):
     try:
-        all_customers = Customer.objects.all()
-        serialized = CustomerSerializer(all_customers, many=True)
+        customers = Customer.objects.all()
+        serialized = CustomerSerializer(customers, many=True)
         return Response({
             "status": True,
             "customers": serialized.data

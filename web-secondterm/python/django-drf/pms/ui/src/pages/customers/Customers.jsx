@@ -56,7 +56,7 @@ const Customers = () => {
                             {
                                 clients.map((customer, i) => {
                                     return (
-                                        <tr className="cursor-pointer bg-white hover:bg-gray-100 transition-colors">
+                                        <tr key={i} className="cursor-pointer bg-white hover:bg-gray-100 transition-colors">
                                             <td className="px-6 py-4">{i + 1}</td>
                                             <td className="px-6 py-4 font-medium text-gray-900">{customer.full_name}</td>
                                             <td className="px-6 py-4">{customer.email}</td>
