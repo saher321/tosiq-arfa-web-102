@@ -20,3 +20,32 @@ def customers(request):
             "status": False,
             "message": "Failed to fetch customers"
         })
+        
+@api_view(['DELETE'])
+def delete_customer(request, id):
+    try:
+        customer = Customer.objects.get(id=id)
+        
+        if customer:
+            customer.delete()
+            
+            # updated records of customers
+            customers = Customer.objects.all()
+            serialized = CustomerSerializer(customers, many=True)
+                    
+            return Response({
+                "status": True,
+                "message": "Customer has been deleted",
+                "customers": serialized.data
+            })
+        else:
+            return Response({
+                "status": False,
+                "message": "Customer does not exist"
+            })
+    
+    except Customer.DoesNotExist():
+        return Response({
+            "status" : False,
+            "message": "Customer not found"
+        })

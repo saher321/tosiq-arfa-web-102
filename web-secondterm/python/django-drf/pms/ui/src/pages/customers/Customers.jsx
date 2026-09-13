@@ -3,7 +3,7 @@ import RoleBasedLayout from '../../layouts/RoleBasedLayout'
 import { Link } from 'react-router'
 import { LuPencil, LuTrash2 } from 'react-icons/lu'
 import axios from 'axios'
-import { CUSTOMERS_API } from '../../utils/apis'
+import { CUSTOMERS_API, DEL_CUSTOMER_API } from '../../utils/apis'
 import toast from 'react-hot-toast'
 
 const Customers = () => {
@@ -14,6 +14,25 @@ const Customers = () => {
             const res = await axios.get(CUSTOMERS_API)
             console.log("customer", res.data)
             if (res.data.status == true) {
+                setClients(res.data.customers)
+            } else {
+                toast.error(res.data.message)
+            }
+        } catch (error) {
+            toast.error("Internal server error")
+            throw new Error(error)
+        }
+    }
+
+    const handleDeleteCustomer = async (id) => {
+        if (!id) {
+            toast.error("ID not found")
+            return;
+        }
+        try {
+            const res = await axios.delete(`${DEL_CUSTOMER_API}/${id}/`)
+            if (res.data.status == true) {
+                toast.success(res.data.message)
                 setClients(res.data.customers)
             } else {
                 toast.error(res.data.message)
@@ -68,6 +87,7 @@ const Customers = () => {
                                                     </button>
 
                                                     <button
+                                                        onClick={() => handleDeleteCustomer(customer.id)}
                                                         className="rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 transition">
                                                         <LuTrash2 />
                                                     </button>
