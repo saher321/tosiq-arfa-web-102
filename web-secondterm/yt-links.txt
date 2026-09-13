@@ -57,3 +57,6 @@
 
 6 Sep, 2026 (dashboard ui fix, customer list ui-api implemented)
 	- https://www.youtube.com/watch?v=SJHvOwojZqM
+
+13 sep, 2026 (delete customer)
+	- https://www.youtube.com/watch?v=O3Ow6K3I5Ow
