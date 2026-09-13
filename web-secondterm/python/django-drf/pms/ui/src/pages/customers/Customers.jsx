@@ -12,6 +12,7 @@ const Customers = () => {
     const getCustomers = async () => {
         try {
             const res = await axios.get(CUSTOMERS_API)
+            console.log("customer", res.data)
             if (res.data.status == true) {
                 setClients(res.data.customers)
             } else {
@@ -28,9 +29,6 @@ const Customers = () => {
     }, [])
     return (
         <RoleBasedLayout>
-            <div>
-                Filter
-            </div>
             <div className='bg-white p-5 rounded-lg shadow-md'>
                 <div className='mb-5 flex items-center justify-between'>
                     <div className='font-bold text-[20px]'>
