@@ -11,8 +11,6 @@ from .serializers import CustomerSerializer
 
 #     if request.method == 'GET':
 
-        
-
 
 @api_view(["GET"])
 def customers(request):
