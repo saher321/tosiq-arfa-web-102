@@ -32,8 +32,8 @@ def customers(request):
 @api_view(['POST'])
 def add_customer(request):
     
-    oldCustomer = Customer.objects.filter(email=request.data.get("email")).exists()
-    if oldCustomer:
+    old_customer = Customer.objects.filter(email=request.data.get("email")).exists()
+    if old_customer:
         return Response({
             "status": False,
             "message": "Customer is already exist with this email"
