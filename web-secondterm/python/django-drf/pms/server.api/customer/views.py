@@ -6,6 +6,14 @@ from .models import Customer
 from .serializers import CustomerSerializer
 # Create your views here.
 
+# @api_view(['GET', 'POST', 'PUT', 'DELETE'])
+# def customer(request)
+
+#     if request.method == 'GET':
+
+        
+
+
 @api_view(["GET"])
 def customers(request):
     try:
@@ -21,6 +29,29 @@ def customers(request):
             "message": "Failed to fetch customers"
         })
         
+@api_view(['POST'])
+def add_customer(request):
+    
+    oldCustomer = Customer.objects.filter(email=request.data.get("email")).exists()
+    if oldCustomer:
+        return Response({
+            "status": False,
+            "message": "Customer is already exist with this email"
+        })
+    
+    customer_serializer = CustomerSerializer(data=request.data)
+    if customer_serializer.is_valid():
+        customer_serializer.save()
+        return Response({
+            "status": True,
+            "message": "Customer has been added"
+        })
+    else:
+        return Response({
+            "status": False,
+            "message": "Failed to add new customer"
+        })
+    
 @api_view(['DELETE'])
 def delete_customer(request, id):
     try:

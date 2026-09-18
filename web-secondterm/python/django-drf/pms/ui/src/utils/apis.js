@@ -6,4 +6,5 @@ export const FP_USER_API = BASE_URL + "/auth/forgot-password/"
 export const RP_USER_API = BASE_URL + "/auth/reset-password/"
 
 export const CUSTOMERS_API = BASE_URL + "/customers/"
+export const ADD_CUSTOMER_API = BASE_URL + "/customers/add/"
 export const DEL_CUSTOMER_API = BASE_URL + "/customers/delete"

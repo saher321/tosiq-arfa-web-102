@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import AuthLayout from "../../layouts/AuthLayout";
 import { Link, useNavigate } from 'react-router'
-import { InputField, SelectInput, SimpleButton } from "../../components/ComponentsLib";
+import { Divider, InputField, SelectInput, SimpleButton } from "../../components/ComponentsLib";
 import { useForm } from 'react-hook-form'
 import { REG_USER_API } from "../../utils/apis";
 import axios from 'axios'
@@ -85,7 +85,7 @@ const Register = () => {
             </div>
           </div>
         </form>
-        <hr />
+        <Divider />
         <div>
           <span>Already have an account? <Link className="text-blue-600 hover:underline" to="/auth/login">Login</Link> </span>
         </div>

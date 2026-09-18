@@ -48,3 +48,11 @@ export const SelectInput = (props) => {
       </select>
   )
 }
+
+
+
+export const Divider = () => {
+  return (
+    <div className="h-[2px] bg-gray-100 w-full"></div>
+  )
+}

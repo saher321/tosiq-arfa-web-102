@@ -8,6 +8,7 @@ import AuthRoute from './utils/AuthRoute'
 import ForogotPassword from './pages/auth/ForgotPassword'
 import ResetPassword from './pages/auth/ResetPassword'
 import Customers from './pages/customers/Customers'
+import AddCustomer from './pages/customers/AddCustomer'
 
 const App = () => {
   return (
@@ -24,7 +25,7 @@ const App = () => {
         <Route element={<ProtectedRoute />}>
           <Route path='/' element={<Dashboard />}/>
           <Route path='/customers' element={<Customers />}/>
-          <Route path='/customers/add' element={<Dashboard />}/>
+          <Route path='/customers/add' element={<AddCustomer />}/>
           <Route path='/customers/edit' element={<Dashboard />}/>
         </Route>
 
