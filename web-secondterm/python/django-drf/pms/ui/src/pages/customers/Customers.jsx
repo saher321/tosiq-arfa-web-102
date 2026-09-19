@@ -12,7 +12,6 @@ const Customers = () => {
     const getCustomers = async () => {
         try {
             const res = await axios.get(CUSTOMERS_API)
-            console.log("customer", res.data)
             if (res.data.status == true) {
                 setClients(res.data.customers)
             } else {
@@ -81,10 +80,11 @@ const Customers = () => {
                                             <td className="px-6 py-4">{customer.email}</td>
                                             <td className="px-6 py-4">
                                                 <div className="flex justify-center gap-2">
-                                                    <button
+                                                    <Link
+                                                        to={`/customers/edit/${customer.id}`}
                                                         className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition">
                                                         <LuPencil />
-                                                    </button>
+                                                    </Link>
 
                                                     <button
                                                         onClick={() => handleDeleteCustomer(customer.id)}

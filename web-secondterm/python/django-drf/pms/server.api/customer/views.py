@@ -49,7 +49,52 @@ def add_customer(request):
             "status": False,
             "message": "Failed to add new customer"
         })
+
+@api_view(['GET'])
+def edit_customer(request, id):
+    if not id:
+        return Response({
+            "status": False,
+            "message": "ID not found"
+        })
     
+    try:
+        customer = Customer.objects.get(id=id)
+        serializer = CustomerSerializer(customer)
+    except Customer.DoesNotExist:
+        return Response({
+            "status": False,
+            "message": "Customer not found"
+        })
+    
+    return Response({
+        "status": True,
+        "customer": serializer.data
+    })
+
+@api_view(['PUT'])
+def update_customer(request):
+    try:
+        id = request.data.get("id")
+        customer = Customer.objects.get(id=id)
+        serializer = CustomerSerializer(customer, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+                "status": True,
+                "message": "Record has been updated"
+            })
+        else:
+            return Response({
+                "status": False,
+                "message": "Failed to update customer"
+            })
+    except Customer.DoesNotExist():
+        return Response({
+            "status": False,
+            "message": "Customer not found"
+        })
+
 @api_view(['DELETE'])
 def delete_customer(request, id):
     try:
