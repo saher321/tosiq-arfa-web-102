@@ -1,57 +1,68 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Customer
-
-from .serializers import CustomerSerializer
+from .models import Project
+from .serializers import ProjectSerializer
+from customer.models import Customer
+from customer.serializers import CustomerSerializer
 # Create your views here.
 
 # @api_view(['GET', 'POST', 'PUT', 'DELETE'])
-# def customer(request)
+# def project(request)
 
 #     if request.method == 'GET':
 
-
 @api_view(["GET"])
-def customers(request):
+def customer_names(request):
     try:
         customers = Customer.objects.all()
         serialized = CustomerSerializer(customers, many=True)
         return Response({
             "status": True,
-            "customers": serialized.data
+            "customers": [
+                { "id": customer["id"], "text": customer["full_name"] }
+                for customer in serialized.data
+            ]
         })
     except Customer.DoesNotExist():
         return Response({
             "status": False,
             "message": "Failed to fetch customers"
         })
-        
-@api_view(['POST'])
-def add_customer(request):
-    
-    old_customer = Customer.objects.filter(email=request.data.get("email")).exists()
-    if old_customer:
-        return Response({
-            "status": False,
-            "message": "Customer is already exist with this email"
-        })
-    
-    customer_serializer = CustomerSerializer(data=request.data)
-    if customer_serializer.is_valid():
-        customer_serializer.save()
+
+@api_view(["GET"])
+def projects(request):
+    try:
+        projects = Project.objects.all()
+        serialized = ProjectSerializer(projects, many=True)
         return Response({
             "status": True,
-            "message": "Customer has been added"
+            "projects": serialized.data
+        })
+    except Project.DoesNotExist():
+        return Response({
+            "status": False,
+            "message": "Failed to fetch projects"
+        })
+        
+@api_view(['POST'])
+def add_project(request):
+    
+    project_serializer = ProjectSerializer(data=request.data)
+    if project_serializer.is_valid():
+        project_serializer.save()
+        return Response({
+            "status": True,
+            "message": "Project has been added"
         })
     else:
         return Response({
             "status": False,
-            "message": "Failed to add new customer"
+            "message": "Failed to add new project"
         })
 
 @api_view(['GET'])
-def edit_customer(request, id):
+def edit_project(request, id):
     if not id:
         return Response({
             "status": False,
@@ -59,25 +70,25 @@ def edit_customer(request, id):
         })
     
     try:
-        customer = Customer.objects.get(id=id)
-        serializer = CustomerSerializer(customer)
-    except Customer.DoesNotExist:
+        project = Project.objects.get(id=id)
+        serializer = ProjectSerializer(project)
+    except Project.DoesNotExist:
         return Response({
             "status": False,
-            "message": "Customer not found"
+            "message": "Project not found"
         })
     
     return Response({
         "status": True,
-        "customer": serializer.data
+        "project": serializer.data
     })
 
 @api_view(['PUT'])
-def update_customer(request):
+def update_project(request):
     try:
         id = request.data.get("id")
-        customer = Customer.objects.get(id=id)
-        serializer = CustomerSerializer(customer, data=request.data)
+        project = Project.objects.get(id=id)
+        serializer = ProjectSerializer(project, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({
@@ -87,39 +98,39 @@ def update_customer(request):
         else:
             return Response({
                 "status": False,
-                "message": "Failed to update customer"
+                "message": "Failed to update project"
             })
-    except Customer.DoesNotExist():
+    except Project.DoesNotExist():
         return Response({
             "status": False,
-            "message": "Customer not found"
+            "message": "Project not found"
         })
 
 @api_view(['DELETE'])
-def delete_customer(request, id):
+def delete_project(request, id):
     try:
-        customer = Customer.objects.get(id=id)
+        project = Project.objects.get(id=id)
         
-        if customer:
-            customer.delete()
+        if project:
+            project.delete()
             
-            # updated records of customers
-            customers = Customer.objects.all()
-            serialized = CustomerSerializer(customers, many=True)
+            # updated records of projects
+            projects = Project.objects.all()
+            serialized = ProjectSerializer(projects, many=True)
                     
             return Response({
                 "status": True,
-                "message": "Customer has been deleted",
-                "customers": serialized.data
+                "message": "Project has been deleted",
+                "projects": serialized.data
             })
         else:
             return Response({
                 "status": False,
-                "message": "Customer does not exist"
+                "message": "Project does not exist"
             })
     
-    except Customer.DoesNotExist():
+    except Project.DoesNotExist():
         return Response({
             "status" : False,
-            "message": "Customer not found"
+            "message": "Project not found"
         })

@@ -21,6 +21,7 @@ class Project(models.Model):
         choices=Role.choices,
         default=Role.INPR,
     )
+    notes = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.title

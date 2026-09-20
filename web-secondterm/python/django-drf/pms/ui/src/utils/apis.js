@@ -15,4 +15,5 @@ export const PROJECTS_API = BASE_URL + "/projects/"
 export const ADD_PROJECT_API = BASE_URL + "/projects/add/"
 export const DEL_PROJECT_API = BASE_URL + "/projects/delete"
 export const EDT_PROJECT_API = BASE_URL + "/projects/edit"
-export const UDT_PROJECT_API = BASE_URL + "/projects/update/"
+
+export const CUSTOMER_NAMES_API = BASE_URL + "/projects/customers/"

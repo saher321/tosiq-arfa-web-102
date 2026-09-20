@@ -5,17 +5,19 @@ import { LuPencil, LuTrash2 } from 'react-icons/lu'
 import axios from 'axios'
 import { DEL_PROJECT_API, PROJECTS_API } from '../../utils/apis'
 import toast from 'react-hot-toast'
+import moment from 'moment'
 
 const Projects = () => {
     const [projects, setProjects] = useState([])
 
     const getProjects = async () => {
         try {
-            const res = await axios.get(PROJECTS_API)
-            if (res.data.status == true) {
-                setProjects(res.data.projects)
+            const response = await axios.get(PROJECTS_API)
+            console.log(response.data)
+            if (response.data.status == true) {
+                setProjects(response.data.projects)
             } else {
-                toast.error(res.data.message)
+                toast.error(response.data.message)
             }
         } catch (error) {
             toast.error("Internal server error")
@@ -65,7 +67,7 @@ const Projects = () => {
                             <tr>
                                 <th scope="col" className="px-6 py-4 font-semibold">Sr#</th>
                                 <th scope="col" className="px-6 py-4 font-semibold">Title</th>
-                                <th scope="col" className="px-6 py-4 font-semibold">Client</th>
+                                <th scope="col" className="px-6 py-4 font-semibold">Customer name</th>
                                 <th scope="col" className="px-6 py-4 font-semibold">Deadline</th>
                                 <th scope="col" className="px-6 py-4 font-semibold">Status</th>
                                 <th scope="col" className="px-6 py-4 font-semibold text-center">Actions</th>
@@ -80,7 +82,7 @@ const Projects = () => {
                                             <td className="px-6 py-4">{i + 1}</td>
                                             <td className="px-6 py-4 font-medium text-gray-900">{project.title}</td>
                                             <td className="px-6 py-4">{project.client}</td>
-                                            <td className="px-6 py-4">{project.dead_line}</td>
+                                            <td className="px-6 py-4">{moment(project.dead_line).format('ll')}</td>
                                             <td className="px-6 py-4">{project.status}</td>
                                             <td className="px-6 py-4">
                                                 <div className="flex justify-center gap-2">
