@@ -12,6 +12,7 @@ class Project(models.Model):
     customer = models.ForeignKey(
         Customer,
         on_delete=models.CASCADE,
+        related_name="project",
     )
     start_date = models.DateTimeField()
     dead_line = models.DateTimeField()

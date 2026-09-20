@@ -33,7 +33,7 @@ def customer_names(request):
 @api_view(["GET"])
 def projects(request):
     try:
-        projects = Project.objects.all()
+        projects = Project.objects.select_related('customer').all()
         serialized = ProjectSerializer(projects, many=True)
         return Response({
             "status": True,

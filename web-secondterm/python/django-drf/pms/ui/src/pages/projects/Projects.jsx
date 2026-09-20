@@ -81,7 +81,7 @@ const Projects = () => {
                                         <tr key={i} className="cursor-pointer bg-white hover:bg-gray-100 transition-colors">
                                             <td className="px-6 py-4">{i + 1}</td>
                                             <td className="px-6 py-4 font-medium text-gray-900">{project.title}</td>
-                                            <td className="px-6 py-4">{project.client}</td>
+                                            <td className="px-6 py-4">{project?.customer?.full_name}</td>
                                             <td className="px-6 py-4">{moment(project.dead_line).format('ll')}</td>
                                             <td className="px-6 py-4">{project.status}</td>
                                             <td className="px-6 py-4">
