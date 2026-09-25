@@ -21,7 +21,7 @@ def customers(request):
             "status": True,
             "customers": serialized.data
         })
-    except Customer.DoesNotExist():
+    except Customer.DoesNotExist:
         return Response({
             "status": False,
             "message": "Failed to fetch customers"
@@ -89,7 +89,7 @@ def update_customer(request):
                 "status": False,
                 "message": "Failed to update customer"
             })
-    except Customer.DoesNotExist():
+    except Customer.DoesNotExist:
         return Response({
             "status": False,
             "message": "Customer not found"
@@ -118,7 +118,7 @@ def delete_customer(request, id):
                 "message": "Customer does not exist"
             })
     
-    except Customer.DoesNotExist():
+    except Customer.DoesNotExist:
         return Response({
             "status" : False,
             "message": "Customer not found"

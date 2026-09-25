@@ -76,7 +76,7 @@ const Projects = () => {
 
                         <tbody>
                             {
-                                projects.map((project, i) => {
+                                projects && projects.map((project, i) => {
                                     return (
                                         <tr key={i} className="cursor-pointer bg-white hover:bg-gray-100 transition-colors">
                                             <td className="px-6 py-4">{i + 1}</td>

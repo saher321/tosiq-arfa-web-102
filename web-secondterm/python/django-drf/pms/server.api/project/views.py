@@ -24,7 +24,7 @@ def customer_names(request):
                 for customer in serialized.data
             ]
         })
-    except Customer.DoesNotExist():
+    except Customer.DoesNotExist:
         return Response({
             "status": False,
             "message": "Failed to fetch customers"
@@ -39,7 +39,7 @@ def projects(request):
             "status": True,
             "projects": serialized.data
         })
-    except Project.DoesNotExist():
+    except Project.DoesNotExist:
         return Response({
             "status": False,
             "message": "Failed to fetch projects"
@@ -100,7 +100,7 @@ def update_project(request):
                 "status": False,
                 "message": "Failed to update project"
             })
-    except Project.DoesNotExist():
+    except Project.DoesNotExist:
         return Response({
             "status": False,
             "message": "Project not found"
@@ -129,7 +129,7 @@ def delete_project(request, id):
                 "message": "Project does not exist"
             })
     
-    except Project.DoesNotExist():
+    except Project.DoesNotExist:
         return Response({
             "status" : False,
             "message": "Project not found"
