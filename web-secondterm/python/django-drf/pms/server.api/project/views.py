@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Project
-from .serializers import ProjectSerializer
+from .serializers import ProjectSerializer, ProjectListSerializer
 from customer.models import Customer
 from customer.serializers import CustomerSerializer
 # Create your views here.
@@ -34,7 +34,7 @@ def customer_names(request):
 def projects(request):
     try:
         projects = Project.objects.select_related('customer').all()
-        serialized = ProjectSerializer(projects, many=True)
+        serialized = ProjectListSerializer(projects, many=True)
         return Response({
             "status": True,
             "projects": serialized.data
