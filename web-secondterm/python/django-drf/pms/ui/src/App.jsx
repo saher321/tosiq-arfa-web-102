@@ -13,6 +13,7 @@ import EditCustomer from './pages/customers/EditCustomer'
 import Projects from './pages/projects/Projects'
 import AddProject from './pages/projects/AddProject'
 import EditProject from './pages/projects/EditProject'
+import CustomerDetails from './pages/customers/CustomerDetails'
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
           <Route path='/customers' element={<Customers />}/>
           <Route path='/customers/add' element={<AddCustomer />}/>
           <Route path='/customers/edit/:id' element={<EditCustomer />}/>
+          <Route path='/customers/details/:id' element={<CustomerDetails />}/>
           
           {/* project routes */}
           <Route path='/projects' element={<Projects />}/>

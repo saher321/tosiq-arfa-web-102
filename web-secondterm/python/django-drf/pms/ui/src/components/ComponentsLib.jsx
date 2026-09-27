@@ -35,7 +35,7 @@ export const SelectInput = (props) => {
           <option defaultValue="" disabled> No options provided yet </option> :
 
           <>
-            <option disabled> Choose on option </option>
+            <option defaultValue={""}> Choose on option </option>
             {
               data.map((context, i) => {
                 return (

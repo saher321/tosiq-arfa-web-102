@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import RoleBasedLayout from '../../layouts/RoleBasedLayout'
 import { Link } from 'react-router'
-import { LuPencil, LuTrash2 } from 'react-icons/lu'
+import { LuEye, LuPencil, LuTrash2 } from 'react-icons/lu'
 import axios from 'axios'
 import { CUSTOMERS_API, DEL_CUSTOMER_API } from '../../utils/apis'
 import toast from 'react-hot-toast'
@@ -80,6 +80,12 @@ const Customers = () => {
                                             <td className="px-6 py-4">{customer.email}</td>
                                             <td className="px-6 py-4">
                                                 <div className="flex justify-center gap-2">
+                                                    <Link
+                                                        to={`/customers/details/${customer.id}`}
+                                                        className="rounded-md bg-gray-200 text-black px-4 py-2 text-sm font-medium hover:text-white hover:bg-blue-600 transition">
+                                                        <LuEye />
+                                                    </Link>
+
                                                     <Link
                                                         to={`/customers/edit/${customer.id}`}
                                                         className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition">
