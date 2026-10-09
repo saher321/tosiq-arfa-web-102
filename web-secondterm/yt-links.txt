@@ -69,3 +69,6 @@
 
 27 Sep, 2026 (customer details)
 	- https://www.youtube.com/watch?v=peNE-8BvwMc
+
+9 Oct, 2026 (fastapi)
+	- https://www.youtube.com/watch?v=38fYaHIa95c
