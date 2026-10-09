@@ -2,6 +2,19 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
+p_categories = [
+    {"id": 1, "name": "Clothing"},
+    {"id": 2, "name": "Food"},
+    {"id": 3, "name": "Wearing"},
+]
+
+@app.get("/products/categories")
+def p_categories():
+    return {
+        "status": True,
+        "catgories": p_categories
+    }
+
 @app.get("/welcome")
 def greetings():
     return {"msg": "Hello to FastApi"}
