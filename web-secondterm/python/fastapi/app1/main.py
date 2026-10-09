@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-p_categories = [
+product_categories = [
     {"id": 1, "name": "Clothing"},
     {"id": 2, "name": "Food"},
     {"id": 3, "name": "Wearing"},
@@ -12,7 +12,7 @@ p_categories = [
 def p_categories():
     return {
         "status": True,
-        "catgories": p_categories
+        "catgories": product_categories
     }
 
 @app.get("/welcome")
