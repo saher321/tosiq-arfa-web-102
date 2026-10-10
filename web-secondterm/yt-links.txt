@@ -72,3 +72,6 @@
 
 9 Oct, 2026 (fastapi)
 	- https://www.youtube.com/watch?v=38fYaHIa95c
+
+10 Oct, 2026 (Api integration, db connection)
+	- https://www.youtube.com/watch?v=-Mr-rNGxWAc
