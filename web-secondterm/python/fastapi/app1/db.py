@@ -12,6 +12,5 @@ cursor = connection.cursor()
 
 categories = cursor.execute("select * from categories")
 users = cursor.execute("select * from users")
-
 connection.commit()
 connection.close()
