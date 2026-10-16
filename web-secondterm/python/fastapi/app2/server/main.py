@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import text
@@ -7,7 +7,7 @@ from config.db import get_db
 
 app = FastAPI()
 origins = [
-    "http://localhost:5173",
+    "http://localhost:5173/*",
 ]
 
 app.add_middleware(
@@ -35,9 +35,40 @@ def db_connection(db: Session = Depends(get_db)):
 
 
 @app.get("/customers")
-def db_connection(db: Session = Depends(get_db)):
+def all_customers(db: Session = Depends(get_db)):
     result = db.execute(text("select * from customers")).mappings().all()
     return {
         "status": True,
         "customers": result
     }
+
+@app.post("/customers/add")
+async def add_customer(request: Request, db: Session = Depends(get_db)):
+    data = await request.json()
+
+    query = """
+    insert into customers (name, email, phone) values (:name, :email, :phone)
+    """
+    result = db.execute(query, {
+        "name": data["name"],
+        "email": data["email"],
+        "phone": data["phone"],
+    })
+
+    db.commit()
+    if (result.rowcount > 0):
+        return {
+            "status": True,
+            "message": "Customer has been added"
+        }
+    else:
+        return {
+            "status": False,
+            "message": "Failed to add customer"
+        }
+
+
+# fetch : select * from customer where id = 123
+# insert: insert into customer (field name) values (organic values)
+# delete: delete from customer where fielname = value
+# update: update set customer 
