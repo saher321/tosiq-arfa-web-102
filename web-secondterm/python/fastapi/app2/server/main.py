@@ -7,7 +7,7 @@ from config.db import get_db
 
 app = FastAPI()
 origins = [
-    "http://localhost:5173/*",
+    "http://localhost:5173",
 ]
 
 app.add_middleware(
@@ -46,10 +46,8 @@ def all_customers(db: Session = Depends(get_db)):
 async def add_customer(request: Request, db: Session = Depends(get_db)):
     data = await request.json()
 
-    query = """
-    insert into customers (name, email, phone) values (:name, :email, :phone)
-    """
-    result = db.execute(query, {
+    query = "insert into customers (name, email, phone) values (:name, :email, :phone)"
+    result = db.execute(text(query), {
         "name": data["name"],
         "email": data["email"],
         "phone": data["phone"],
@@ -68,7 +66,7 @@ async def add_customer(request: Request, db: Session = Depends(get_db)):
         }
 
 
-# fetch : select * from customer where id = 123
-# insert: insert into customer (field name) values (organic values)
-# delete: delete from customer where fielname = value
-# update: update set customer 
+# fetch : select email from customers where email = data["email"]
+# insert: insert into customers (field name) values (organic values)
+# delete: delete from customers where fielname = value
+# update: update set customers 
