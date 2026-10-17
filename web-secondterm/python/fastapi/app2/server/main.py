@@ -65,8 +65,29 @@ async def add_customer(request: Request, db: Session = Depends(get_db)):
             "message": "Failed to add customer"
         }
 
+@app.delete("/customers/delete/{customer_id}")
+def delete_customer(customer_id, db: Session = Depends(get_db)):
+    query = """
+    delete from customers where id = :customer_id
+    """
+    result = db.execute(text(query), {"id": customer_id})
+    
+    db.commit()
+    
+    if result.rowcount == 0:
+        return {
+            "status": False,
+            "message": "No records were found!"
+        }
+    else:
+        return {
+            "status": True,
+            "message": "Customer has been deleted",
+            "customers": all_customers(db)
+        }
+
 
 # fetch : select email from customers where email = data["email"]
 # insert: insert into customers (field name) values (organic values)
-# delete: delete from customers where fielname = value
-# update: update set customers 
+# delete: delete from customers where fieldname = value
+# update: update customers set name=value

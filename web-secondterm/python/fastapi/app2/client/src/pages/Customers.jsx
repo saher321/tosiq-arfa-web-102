@@ -4,6 +4,7 @@ import WebLayout from '../layout/WebLayout'
 import { Link } from 'react-router'
 
 const CUSTOMER_API_URL = 'http://127.0.0.1:8000/customers'
+const DEL_CUS_API_URL = 'http://127.0.0.1:8000/customers/delete'
 
 const Customers = () => {
   const [customers, setCustomers] = useState([])
@@ -23,6 +24,21 @@ const Customers = () => {
     fetchCustomers()
   }, [])
 
+  const handleDeleteCustomer = async (id) => {
+    try {
+      const response = await axios.delete(`${DEL_CUS_API_URL}/${id}`)
+      console.log(response.data)
+      if (response.data.status == true){
+        console.log(response.data.message)
+        // setCustomers(response.data.customers)
+      } else {
+        console.log(response.data.message)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <WebLayout>
     <div className="min-h-screen bg-slate-100 px-4 py-10">
@@ -41,6 +57,7 @@ const Customers = () => {
             <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
               <thead className="bg-slate-50 text-slate-600">
                 <tr>
+                  <th className="px-4 py-3 font-semibold">Actions</th>
                   <th className="px-4 py-3 font-semibold">ID</th>
                   <th className="px-4 py-3 font-semibold">Name</th>
                   <th className="px-4 py-3 font-semibold">Email</th>
@@ -52,6 +69,14 @@ const Customers = () => {
               <tbody className="divide-y divide-slate-100">
                 {customers.map((c) => (
                     <tr key={c.id} className="hover:bg-indigo-50/50">
+                      <td className="px-4 flex gap-3 py-3 font-mono text-slate-500">
+                        <button onClick={() => handleDeleteCustomer(c.id)} className='py-2 px-3 bg-gray-800 text-white rounded hover:shadow-lg'>
+                          Delete
+                        </button>
+                        <Link className='py-2 px-3 bg-gray-800 text-white rounded hover:shadow-lg'>
+                          Edit
+                        </Link>
+                      </td>
                       <td className="px-4 py-3 font-mono text-slate-500">#{c.id}</td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-3">
