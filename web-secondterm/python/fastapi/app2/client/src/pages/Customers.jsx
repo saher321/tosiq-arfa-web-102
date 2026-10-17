@@ -74,7 +74,7 @@ const Customers = () => {
                         <button onClick={() => handleDeleteCustomer(c.id)} className='py-2 px-3 bg-gray-800 text-white rounded hover:shadow-lg'>
                           Delete
                         </button>
-                        <Link className='py-2 px-3 bg-gray-800 text-white rounded hover:shadow-lg'>
+                        <Link to={`/customers/edit/${c.id}`} className='py-2 px-3 bg-gray-800 text-white rounded hover:shadow-lg'>
                           Edit
                         </Link>
                       </td>
