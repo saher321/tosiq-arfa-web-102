@@ -25,12 +25,13 @@ const Customers = () => {
   }, [])
 
   const handleDeleteCustomer = async (id) => {
+    if (!confirm("Are you sure you want to delete this?")) return
     try {
       const response = await axios.delete(`${DEL_CUS_API_URL}/${id}`)
       console.log(response.data)
       if (response.data.status == true){
         console.log(response.data.message)
-        // setCustomers(response.data.customers)
+        setCustomers(response.data.customers)
       } else {
         console.log(response.data.message)
       }

@@ -68,7 +68,7 @@ async def add_customer(request: Request, db: Session = Depends(get_db)):
 @app.delete("/customers/delete/{customer_id}")
 def delete_customer(customer_id, db: Session = Depends(get_db)):
     query = """
-    delete from customers where id = :customer_id
+    delete from customers where id = :id
     """
     result = db.execute(text(query), {"id": customer_id})
     
@@ -83,7 +83,7 @@ def delete_customer(customer_id, db: Session = Depends(get_db)):
         return {
             "status": True,
             "message": "Customer has been deleted",
-            "customers": all_customers(db)
+            "customers": all_customers(db)["customers"]
         }
 
 
