@@ -25,9 +25,9 @@ const EditCustomer = () => {
 
   const handleUpdateCustomer = async (data) => {
     try {
-      const response = await axios.post("http://127.0.0.1:8000/customers/add", data)
+      const response = await axios.put(`http://127.0.0.1:8000/customers/update`, data)
+      console.log(response.data)
       if (response.data.status == true) {
-        console.log(response.data.message)
         navigate('/customers', { replace: true })
       } else {
         console.log(response.data.message)

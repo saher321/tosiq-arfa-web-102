@@ -43,17 +43,6 @@ def all_customers(db: Session = Depends(get_db)):
     }
 
 
-@app.get("/customers/edit/{customer_id}")
-def single_customer(customer_id, db: Session = Depends(get_db)):
-    query = """
-    select id, name, email, phone from customers where id=:id
-    """
-    result = db.execute(text(query), {"id": customer_id}).mappings().first()
-    # print(result)
-    return {
-        "status": True,
-        "customer": result
-    }
 
 @app.post("/customers/add")
 async def add_customer(request: Request, db: Session = Depends(get_db)):
@@ -99,6 +88,43 @@ def delete_customer(customer_id, db: Session = Depends(get_db)):
             "customers": all_customers(db)["customers"]
         }
 
+@app.get("/customers/edit/{customer_id}")
+def single_customer(customer_id, db: Session = Depends(get_db)):
+    query = """
+    select id, name, email, phone from customers where id=:id
+    """
+    result = db.execute(text(query), {"id": customer_id}).mappings().first()
+    # print(result)
+    return {
+        "status": True,
+        "customer": result
+    }
+
+@app.put("/customers/update")
+async def update_customer(request: Request, db : Session = Depends(get_db)):
+    data = await request.json()
+    query = """
+    update customers set name = :name, email = :email, phone = :phone where id = :id
+    """
+    result = db.execute(text(query), {
+        "id": data["id"],
+        "name": data["name"],
+        "email": data["email"],
+        "phone": data["phone"],
+    })
+
+    db.commit()
+
+    if result.rowcount == 0:
+        return {
+            "status": False,
+            "message": "Failed to update"
+        }
+    else:
+        return {
+            "status": True,
+            "message": "Customer has been udpated!"
+        }
 
 # fetch : select email from customers where email = data["email"]
 # insert: insert into customers (field name) values (organic values)
