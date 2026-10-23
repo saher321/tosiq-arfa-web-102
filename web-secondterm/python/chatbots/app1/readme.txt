@@ -1,1 +1,1 @@
-api_key = AQ.Ab8RN6IEQtv1J14gvkT6VCuFpdMW04Qc_tbKHhn0z7z16TciYQ
+password = AQ.Ab8RN6IEQtv1J14gvkT6VCuFpdMW04Qc_tbKHhn0z7z16TciYQ
