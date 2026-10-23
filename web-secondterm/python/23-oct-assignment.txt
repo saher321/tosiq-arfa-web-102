@@ -1,0 +1,26 @@
+Assignment 23 Oct, 2026
+
+Create a project
+
+frontend: Reactjs
+backend: Python (Fastapi)
+
+task: create a dependent dropdown
+of categories and their products
+
+Dropdown 1: Categories
+Dropdown 2: Sub Categories
+
+Dropdown is Select option
+
+categories = [ 
+    {"id", "1", "name": "Shoes"},
+    {"id", "2", "name": "Food"},
+]
+
+sub_categies = [
+    {"id": "1", "name": "Addidas", "cat_id", "1"},
+    {"id": "2", "name": "Pumma", "cat_id", "1"},
+    {"id": "3", "name": "Gucci", "cat_id", "1"},
+    {"id": "4", "name": "Beverage items", "cat_id", "2"},
+]

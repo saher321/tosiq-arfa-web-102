@@ -84,3 +84,6 @@
 
 18 Oct, 2026 (update)
 	- https://www.youtube.com/watch?v=wJnqWCOgqw4
+
+23 Oct, 2026 (assignment, simple chatbot)
+	-  https://www.youtube.com/watch?v=8Iz83BGAaCA
