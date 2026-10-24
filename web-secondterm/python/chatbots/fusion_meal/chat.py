@@ -6,7 +6,7 @@ api_key = "AQ.Ab8RN6JX-4E6iq-3uPCEHrVdA5uwpYLZ-XD_Osd9CVq9vhPu-g"
 
 client = genai.Client(api_key=api_key)
 
-SYSTEM_PROMPT= F"""
+SYSTEM_PROMPT= f"""
 You are professional AI assistant
 Give proper answer to questions about our company details.
 
@@ -30,11 +30,11 @@ while True:
         break
 
     response = client.models.generate_content(
-        model="gemini-3.8-flash",
+        model="gemini-3.6-flash",
         contents=question,
         config=types.GenerateContentConfig(
-            sys=SYSTEM_PROMPT
+            system_instruction=SYSTEM_PROMPT
         )
     )
 
-    print("Bot:",response.text)
+    print("Bot:",response.text, "\n")
