@@ -19,7 +19,7 @@ Rules:
 
 
 print("\n ********* WELCOME TO FUSION MEAL ******** \n")
-print("Type 'exit' to quit.")
+print("\nNote: Type 'exit' to quit. \n")
 
 
 
