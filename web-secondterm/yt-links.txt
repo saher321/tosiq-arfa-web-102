@@ -90,3 +90,6 @@
 
 25 Oct, 2026 (chatbot in fastapi)
 	- https://www.youtube.com/watch?v=AnAqiIrrc7g
+
+31 Oct, 2026 (revise)
+	- https://www.youtube.com/watch?v=arV41ygsIdU
